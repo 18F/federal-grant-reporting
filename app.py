@@ -8,7 +8,6 @@
 PDF_FILENAME = 'SF425-V2.pdf'
 
 import os
-import sys
 import pypdftk
 
 from flask import Flask

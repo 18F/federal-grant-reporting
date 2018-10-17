@@ -1,18 +1,13 @@
 #!python
 
-# to run:
-# FLASK_APP=app.py flask run
-# You'll need to set PDFTK_PATH env variable if 'which pdftk' returns anything other than
-# '/usr/bin/pdftk'.
-
-PDF_FILENAME = 'SF425-V2.pdf'
-
 import os
 import pypdftk
 
 from flask import Flask, render_template
 
 app = Flask(__name__)
+
+PDF_FILENAME = 'SF425-V2.pdf'
 
 
 @app.route("/")

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<p>
+  This automatically pre-fills some of the SF-425's fields based on
+  information you provided when you first applied for a grant.
+</p>
+<p>
+  You'll have a chance to make edits before you submit it.
+</p>
+<a class="usa-button usa-button-big" href="/generate-sf425">Let's go</a>
+
+{% endblock %}

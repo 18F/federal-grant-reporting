@@ -10,13 +10,21 @@ PDF_FILENAME = 'SF425-V2.pdf'
 import os
 import pypdftk
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello():
+    return render_template('get-this-party-started.html')
+
+
+@app.route("/generate-sf425")
+def generate_sf425():
+    '''
+    Using sample data, fill out and display the specified PDF.
+    '''
     pdf_directory = os.path.dirname(os.path.abspath(__file__))
     original_pdf_path = pdf_directory + '/' + PDF_FILENAME
 
@@ -29,8 +37,14 @@ def hello():
 
 
 def generate_sample_field_values():
-    # Provide sample data for all SF-425 fields for which we can find answers via the SAM API.
-    # Here's the field inventory, for reference: https://docs.google.com/spreadsheets/d/1TIAfrbB4fglEk66jqRmug5qUE16MHZ0A_nhg-crCl9g/edit#gid=872605059
+    '''
+    Provide sample data for all SF-425 fields for which we can find answers via
+    the SAM API (http://gsa.github.io/sam_api/sam/index.html).
+
+    Here's the field inventory, for reference:
+    https://docs.google.com/spreadsheets/d/1TIAfrbB4fglEk66jqRmug5qUE16MHZ0A_nhg-crCl9g/edit#gid=872605059
+    '''
+
     fields =    {
                     'GrantApplicationWrapper[0].SF425_2_0_Main[0].SF425_2_0_P2[0].PDEmail[0]': 'email',
                     'GrantApplicationWrapper[0].SF425_2_0_Main[0].SF425_2_0_P2[0].FirstName[0]': '(first name from govtBusinessPoc)',

@@ -6,24 +6,18 @@ The Federal Grant Reporting (FGR) Project is sponsored by the GSA [Technology Tr
 
 ## Phase I: Investigation
 
-This was a sprint to identify opportunities to improve the federal grant reporting process — by eliminating redundancies and creating efficiencies through improved technology — that could be adapted across federal programs, thereby increasing federal grant programs' efficacy to those being served as well as taxpayers' return on investment.
+The first phase of this project consisted of in-depth user research, including direct observation of a grant report submission process and the receipt and analysis of submitted reports.
 
-Links to phase 1 materials
-* Final presentation
+*Link to Phase I final presentation*
 
 ## Phase II: Discovery
 
-*Description of Phase Two here*
+During the second phase, the team broadened its focus to an analysis of the grant reporting actions shared by the majority of federal grantees, the data standards development work happening across the federal government, and the opportunities to improve related systems and processes for agencies and auditors. During this phase, the team also prototyped several proofs of concept for reducing the reporting burden for federal grant recipients.
 
-Links to phase 2 materials
-* Final presentation
+*Link to Phase II final presentation*
 
 ## Phase III: Development
 
-*Description of Phase Two here*
-
-Links to important phase 3 docs
+Working in conjunction with a partner agency, the team will develop an initial prototype into a minimum viable product (MVP) focused on improving the grant reporting experience for grants managers or grantees at the federal level. This work will be informed by and in conversation with the ongoing data standards work taking place across the federal government.
 
 ## Important resources
-
-

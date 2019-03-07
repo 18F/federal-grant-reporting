@@ -22,3 +22,5 @@ Working in conjunction with a partner agency, the team will develop an initial p
 
 ## Important resources
 
+* Phase 3 [area of focus](https://docs.google.com/document/d/1qMXaHjQhaT4crKhMoXSnzQgBsjItdM94kILYJoSf-9Y/edit) (:lock:)
+* Phase 3 [timeline](https://docs.google.com/document/d/138eE7wCwZCrDpuHr4ufulan6bRByTlcZCnPOkpilgvA/edit#) (:lock:)

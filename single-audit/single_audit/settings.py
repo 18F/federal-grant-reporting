@@ -78,8 +78,15 @@ WSGI_APPLICATION = 'single_audit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'SECRET',
+        'USER': 'SECRET',
+        'PASSWORD': 'SECRET',
+        'HOST': 'SECRET',
+        'PORT': 'SECRET',
+        'TEST': {
+            'NAME': 'test_SECRET',
+        }
     }
 }
 

@@ -9,7 +9,6 @@ verify_ssl = true
 selenium = "*"
 django = "*"
 jinja2 = "*"
-django-uswds-forms = "*"
 psycopg2 = "*"
 
 [requires]

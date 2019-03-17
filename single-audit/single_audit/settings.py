@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fac',
+    'fac.apps.FacConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,11 +54,10 @@ ROOT_URLCONF = 'single_audit.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [],
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
-            'environment': 'single_audit.jinja2.environment',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

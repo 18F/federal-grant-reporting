@@ -1,10 +1,8 @@
 from django.test import TestCase
-from django.urls import resolve
-from fac.views import home
 
 
 class HomepageTest(TestCase):
 
-    def test_root_url_resolves_to_homepage_view(self):
-        found = resolve('/')
-        self.assertEqual(found.func, home)
+    def test_homepage_uses_correct_template(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'index.html')

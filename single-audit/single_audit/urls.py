@@ -17,5 +17,5 @@ from django.urls import path
 from fac import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.get_single_audit_package, name='FAC'),
 ]

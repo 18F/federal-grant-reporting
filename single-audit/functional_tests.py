@@ -17,8 +17,10 @@ class NewGranteeVisitorTest(unittest.TestCase):
         # just closed out.
         self.browser.get('http://localhost:8000')
 
-        # She notices the page title and header mention the SF-SAC.
-        self.assertIn('SF-SAC', self.browser.title)
+        # She notices the page header mentions the SF-SAC.
+        header_text = self.browser.find_elements_by_tag_name('h1')[1].text
+        self.assertIn('SF-SAC', header_text)
+
         self.fail('@todo: Finish this test.')
 
 

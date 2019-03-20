@@ -1,8 +1,8 @@
 from django.test import TestCase
 
 
-class HomepageTest(TestCase):
+class FACTest(TestCase):
 
-    def test_homepage_uses_correct_template(self):
+    def test_fac_uses_correct_template(self):
         response = self.client.get('/')
-        self.assertTemplateUsed(response, 'index.html')
+        self.assertTemplateUsed(response, 'fac.html')

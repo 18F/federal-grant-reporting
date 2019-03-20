@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "aa0d05f8a268b0f7cb4667ad55ea95d899fd36c492708d24da7f373fe9439875"
+            "sha256": "ed1a14d73f48134dd8d0a035adb74365ca571c5b520973725394ccf87080deb1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,11 @@
         ]
     },
     "default": {
+        "designstandards": {
+            "editable": true,
+            "git": "https://github.com/department-of-veterans-affairs/django-designstandards.git",
+            "ref": "769ad7135f6098b1573277c4c3456a5b6d99eca0"
+        },
         "django": {
             "hashes": [
                 "sha256:275bec66fd2588dd517ada59b8bfb23d4a9abc5a362349139ddda3c7ff6f5ade",
@@ -23,6 +28,14 @@
             ],
             "index": "pypi",
             "version": "==2.1.7"
+        },
+        "django-localflavor": {
+            "hashes": [
+                "sha256:0cee94c4b8f0214a5ba7be7e935019a8c062f4e7726d1df4b1e453cb812b2039",
+                "sha256:12ce98b13adcd68bb4babcd937d0ae5a0fd5801f71acaf9a6bf1784c218ef53c"
+            ],
+            "index": "pypi",
+            "version": "==2.1"
         },
         "jinja2": {
             "hashes": [

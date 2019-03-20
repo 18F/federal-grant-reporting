@@ -7,10 +7,12 @@ verify_ssl = true
 
 [packages]
 selenium = "*"
-django = "*"
+django = ">=2.1.7"
 jinja2 = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
+django-localflavor = "*"
+designstandards = {editable = true,git = "https://github.com/department-of-veterans-affairs/django-designstandards.git"}
 
 [requires]
 python_version = "3.7"

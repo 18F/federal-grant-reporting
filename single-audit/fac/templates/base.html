@@ -122,16 +122,28 @@
       {% block content_bottom %}{% endblock %}
     </div>
 
-    <footer id="footer" role="contentinfo">
-      {% block footer_nav %}
-      {% endblock %}
-      {% block footer %}
-        <div>
-          <p class="copyright">&copy; {{ now.year }} {{ site.name }}</p>
+    {% block footer %}
+      <footer class="usa-footer usa-footer-slim" role="contentinfo">
+        <div class="usa-grid usa-footer-return-to-top">
+          <a href="#">Return to top</a>
         </div>
-      {% endblock %}
-    </footer>
-  </div> <!-- /#wrapper -->
+        <div class="usa-footer-primary-section">
+          <div class="usa-grid">
+            {% block footer_nav %}
+            {% endblock %}
+          </div>
+        </div>
+
+        <div class="usa-footer-secondary_section">
+          <div class="usa-grid">
+            <div class="usa-footer-logo">
+              <img class="usa-footer-slim-logo-img" src="/static/img/logo-img.png" alt="">
+              <h3 class="usa-footer-slim-logo-heading">Federal Audit Clearinghouse</h3>
+            </div>
+          </div>
+        </div>
+      </footer>
+    {% endblock %}
 
   {% block init_js %}{% endblock %}{# useful for vars and other initializations #}
 

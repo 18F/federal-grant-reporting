@@ -6,5 +6,7 @@ geckodriver.log
 
 .DS_Store
 
+node_modules
+
 data_analysis
 */backups

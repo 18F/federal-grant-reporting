@@ -15,7 +15,7 @@ rows_of_preamble = 10
 
 # Intentionally focusing on just the 'standard', not 'variant', ones for now.
 # @someday: Rework this to be more robust and flexible.
-files_directory='csvs/standard'
+files_directory = 'csvs/standard'
 
 
 def get_filenames_of_field_inventories(directory=files_directory):
@@ -23,8 +23,10 @@ def get_filenames_of_field_inventories(directory=files_directory):
 
 
 def get_form_name_from_filename(filename):
-    if filename[:-4] == '.csv':
+    if filename[-4:] == ".csv":
         return filename[:-4]
+    else:
+        return filename
 
 
 def process_fields(filename, field_occurrences=defaultdict(list)):
@@ -48,6 +50,7 @@ def process_fields(filename, field_occurrences=defaultdict(list)):
             if fieldname != "[]":
                 form_name = get_form_name_from_filename(filename)
                 field_occurrences[fieldname].append(form_name)
+
     return field_occurrences
 
 
@@ -92,9 +95,11 @@ def print_dictionary(dictionary):
 
 def describe_repeats(repeated_fields):
     print("There are " + str(len(repeated_fields)) + " repeated fields.")
+
     print("They are: ")
-    for k in repeated_fields.keys():
-        print(k)
+    for k, v in repeated_fields.items():
+        print(k + ", which appears in:")
+        print(v)
 
 
 def identify_and_describe_duplicate_fields():
@@ -106,7 +111,7 @@ def identify_and_describe_duplicate_fields():
         process_fields(form, field_inventory)
 
     print("These " + str(len(forms)) + " forms include "
-        + str(len(field_inventory)) + " fields total.")
+          + str(len(field_inventory)) + " fields total.")
 
     repeated_fields = discard_non_duplicates(field_inventory)
 

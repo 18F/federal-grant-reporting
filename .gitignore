@@ -4,6 +4,8 @@ __pycache__
 db.sqlite3
 geckodriver.log
 
+**/settings.py
+
 .DS_Store
 
 node_modules

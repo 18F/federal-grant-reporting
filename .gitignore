@@ -1,4 +1,14 @@
-data_analysis
-.DS_Store
 __pycache__
+*.pyc
+
+db.sqlite3
+geckodriver.log
+
+**/settings.py
+
+.DS_Store
+
+node_modules
+
+data_analysis
 */backups

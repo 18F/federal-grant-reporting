@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="usa-grid usa-section">
+    <div class="usa-width-one-third">
+      <h1>Your results:</h1>
+    </div>
+    <div class="usa-width-two-thirds">
+
+      <p>...are awesome!</p>
+      <h1>{{ results.findings }}</h1>
+      <a href="../generate-a-csv" class="usa-button usa-button-big">Download results (CSV)</a>
+
+    </div>
+  </section>
+
+  {% block error_message %}{% endblock %}
+
+{% endblock %}

@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from fac import views
+# from fac import views  # @todo: Revisit, split out by app.
+from fac.views import get_single_audit_package
+from distiller import views
 
 urlpatterns = [
-    path('', views.get_single_audit_package, name='FAC'),
+    path('fac', get_single_audit_package, name='FAC'),
+    path('', views.prompt_for_agency_name, name='Distiller'),
+    path('get-single-audits-by-agency/', views.show_agency_level_summary, name='Show relevant single audits'),
+    path('generate-a-csv/', views.offer_download_of_agency_specific_csv, name='Prompt to save a CSV'),
 ]

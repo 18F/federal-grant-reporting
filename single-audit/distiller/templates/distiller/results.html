@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <section class="usa-grid usa-section">
+
+  <h1>Single audits for your attention</h1>
+  <section class="usa-section">
     <div class="usa-width-one-third">
-      <h1>Your results:</h1>
+      <h2>Overview of results:</h2>
     </div>
     <div class="usa-width-two-thirds">
-
-      <p>...are awesome!</p>
-      <h1>{{ results.findings }}</h1>
+      <p class="usa-font-lead">
+        {{ agency_name }} is the <strong>cognizant</strong> agency for
+        {{ results.cognizant_sum }} of these single audits.
+      </p>
+      <p class="usa-font-lead">
+        Of those, <strong>{{ results.findings }}</strong> had findings.
+      </p>
       <a href="../generate-a-csv" class="usa-button usa-button-big">Download results (CSV)</a>
 
     </div>

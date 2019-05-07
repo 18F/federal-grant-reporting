@@ -86,6 +86,25 @@ agencies_by_prefix = {
 }
 
 
+def __get_agency_name_from_prefix(agency_prefix):
+    ''' Given a two-digit prefix from the Federal Audit Clearinghouse, return
+    the name of the corresponding agency.
+    '''
+    return agencies_by_prefix[agency_prefix]
+
+
+def __is_valid_agency_prefix(agency_prefix):
+    ''' Given a two-digit prefix a la the Federal Audit Clearinghouse, return
+    True if it's one of the prefixes that the FAC lists as a "federal agency
+    prefix."
+
+    Implementing this as a dict lookup instead of a range check because not
+    every two-digit combination between 00 and 99 is actually valid (i.e., listed
+    in FAC).
+    '''
+    return agency_prefix in agencies_by_prefix
+
+
 class AgencySelectionForm(forms.Form):
     # @todo eventually: expand to include cognitive/oversight/both option. Maybe.
     agency = forms.ChoiceField(choices=agencies_by_prefix.items())

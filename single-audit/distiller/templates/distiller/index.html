@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="usa-grid usa-section">
+    <div class="usa-width-one-third">
+      <h1>Select your agency:</h1>
+    </div>
+    <div class="usa-width-two-thirds">
+
+      <!-- @todo: Solve for USWDS incorporation. Ah well. -->
+      <form action="/get-single-audits-by-agency/" method="post" class="usa-form">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+      </form>
+
+    </div>
+  </section>
+
+  {% block error_message %}{% endblock %}
+
+{% endblock %}

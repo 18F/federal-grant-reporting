@@ -14,6 +14,7 @@ psycopg2-binary = "*"
 django-localflavor = "*"
 designstandards = {editable = true,git = "https://github.com/department-of-veterans-affairs/django-designstandards.git"}
 pandas = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.7"

@@ -20,7 +20,22 @@ During the second phase, the team broadened its focus to an analysis of the gran
 
 The team is building out a minimum viable product (MVP) focused on improving the single audit finding resolution experience for federal grant managers and grantees. This work is informed by and in conversation with several agencies as well as the ongoing data standards work taking place across the federal government.
 
+
 ## Important resources
 
 * Phase 3 [area of focus](https://docs.google.com/document/d/1qMXaHjQhaT4crKhMoXSnzQgBsjItdM94kILYJoSf-9Y/edit) (:lock:)
 * Phase 3 [timeline](https://docs.google.com/document/d/138eE7wCwZCrDpuHr4ufulan6bRByTlcZCnPOkpilgvA/edit#) (:lock:)
+
+
+## Contributing
+
+See [CONTRIBUTING](CONTRIBUTING.md) for additional information.
+
+
+## Public domain
+
+This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
+
+> This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+>
+> All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.

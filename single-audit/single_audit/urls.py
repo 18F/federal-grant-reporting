@@ -13,12 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path
 # from fac import views  # @todo: Revisit, split out by app.
 from fac.views import get_single_audit_package
 from distiller import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('fac', get_single_audit_package, name='FAC'),
     path('', views.prompt_for_agency_name, name='Distiller'),
     path('get-single-audits-by-agency/', views.show_agency_level_summary, name='Show relevant single audits'),

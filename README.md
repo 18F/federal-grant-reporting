@@ -1,4 +1,33 @@
 # Federal Grant Reporting Project
+Improving the experience of federal grant reporting.
+
+# Single audit resolution
+Enabling simpler, faster, easier, better resolution of single audit findings by
+agencies and grantees alike.
+
+## Local installation
+
+This is a Django app designed to run on Python 3.7.3.
+[pipenv](https://pipenv.readthedocs.io) is recommended for creating a virtual
+environment and managing dependencies. If you don't already have `pipenv`
+installed:
+
+1. Confirm that your `pip` uses Python 3, not Python 2, then
+2. Install pipenv by running `pip install pipenv`.
+
+Now you can prepare your development environment by running:
+
+```
+git clone git@github.com:18F/federal-grant-reporting.git
+cd federal-grant-reporting
+cd single-audit
+pipenv shell
+pipenv install
+./manage.py runserver
+```
+
+The app should now be running at http://localhost:8000 or http://127.0.0.1:8000.
+
 
 ## Background
 

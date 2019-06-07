@@ -18,7 +18,7 @@ During the second phase, the team broadened its focus to an analysis of the gran
 
 ## Phase III: Development
 
-Working in conjunction with a partner agency, the team will develop an initial prototype into a minimum viable product (MVP) focused on improving the grant reporting experience for grants managers or grantees at the federal level. This work will be informed by and in conversation with the ongoing data standards work taking place across the federal government.
+The team is building out a minimum viable product (MVP) focused on improving the single audit finding resolution experience for federal grant managers and grantees. This work is informed by and in conversation with several agencies as well as the ongoing data standards work taking place across the federal government.
 
 ## Important resources
 

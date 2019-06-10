@@ -12,7 +12,7 @@ This is a Django app designed to run on Python 3.7.3.
 environment and managing dependencies. If you don't already have `pipenv`
 installed:
 
-1. Confirm that your `pip` uses Python 3, not Python 2, then
+1. Run `pip --version` and confirm that your `pip` uses Python 3, not Python 2, then
 2. Install pipenv by running `pip install pipenv`.
 
 Now you can prepare your development environment by running:

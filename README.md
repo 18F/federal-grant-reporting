@@ -23,7 +23,7 @@ cd federal-grant-reporting
 cd single-audit
 pipenv shell
 pipenv install
-./manage.py runserver
+./manage.py runserver --settings=single_audit.settings.development
 ```
 
 The app should now be running at http://localhost:8000 or http://127.0.0.1:8000.

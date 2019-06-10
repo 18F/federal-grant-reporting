@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'localflavor',
     'fac.apps.FacConfig',
     'distiller.apps.DistillerConfig',
-    'resolve_findings.apps.ResolveFindingsConfig',
 ]
 
 MIDDLEWARE = [

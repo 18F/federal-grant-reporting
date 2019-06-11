@@ -49,7 +49,7 @@ Apply these migrations to your local database:
 python manage.py migrate --settings=single_audit.settings.development
 ```
 
-Run the project locally:
+Now you can start the project locally:
 
 ```bash
 ./manage.py runserver --settings=single_audit.settings.development

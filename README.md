@@ -23,11 +23,39 @@ cd federal-grant-reporting
 cd single-audit
 pipenv shell
 pipenv install
+```
+
+You will also need to set up a local [PostgreSQL](https://www.postgresql.org) database that matches the configuration in `single-audit/single_audit/settings/development.py`. (Alternately, you can create a local database and user and update the app's configuration to match.)
+
+First, create a new Postgres database from the command line:
+
+```bash
+createdb FGR_LOCAL_DB
+```
+
+Then, once you are logged into the FGR_LOCAL_DB Postgres database:
+
+```SQL
+CREATE USER fgr_local_user;
+\password fgr_local_user;
+{enter the password defined in development.py}
+```
+
+At this point, if you try running the project locally, you may see a message like: "You have 17 unapplied migration(s)..."
+
+Apply these migrations to your local database:
+
+```bash
+python manage.py migrate --settings=single_audit.settings.development
+```
+
+Now you can start the project locally:
+
+```bash
 ./manage.py runserver --settings=single_audit.settings.development
 ```
 
 The app should now be running at http://localhost:8000 or http://127.0.0.1:8000.
-
 
 ## Background
 

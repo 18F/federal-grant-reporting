@@ -30,7 +30,7 @@ You will also need to set up a local Postgres database that matches the configur
 First, create a new Postgres database from the commandline:
 
 ```bash
-createdb FGR_LOCAL_DB -U {existing database user role}
+createdb FGR_LOCAL_DB
 ```
 
 Then, once you are logged into the FGR_LOCAL_DB Postgres database:

@@ -25,9 +25,9 @@ pipenv shell
 pipenv install
 ```
 
-You will also need to set up a local Postgres database that matches the configuration in `single-audit/single_audit/settings/development.py`.
+You will also need to set up a local [PostgreSQL](https://www.postgresql.org) database that matches the configuration in `single-audit/single_audit/settings/development.py`. (Alternately, you can create a local database and user and update the app's configuration to match.)
 
-First, create a new Postgres database from the commandline:
+First, create a new Postgres database from the command line:
 
 ```bash
 createdb FGR_LOCAL_DB

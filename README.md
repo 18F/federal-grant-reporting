@@ -1,4 +1,33 @@
 # Federal Grant Reporting Project
+Improving the experience of federal grant reporting.
+
+# Single audit resolution
+Enabling simpler, faster, easier, better resolution of single audit findings by
+agencies and grantees alike.
+
+## Local installation
+
+This is a Django app designed to run on Python 3.7.3.
+[pipenv](https://pipenv.readthedocs.io) is recommended for creating a virtual
+environment and managing dependencies. If you don't already have `pipenv`
+installed:
+
+1. Run `pip --version` and confirm that your `pip` uses Python 3, not Python 2, then
+2. Install pipenv by running `pip install pipenv`.
+
+Now you can prepare your development environment by running:
+
+```
+git clone git@github.com:18F/federal-grant-reporting.git
+cd federal-grant-reporting
+cd single-audit
+pipenv shell
+pipenv install
+./manage.py runserver --settings=single_audit.settings.development
+```
+
+The app should now be running at http://localhost:8000 or http://127.0.0.1:8000.
+
 
 ## Background
 
@@ -18,9 +47,24 @@ During the second phase, the team broadened its focus to an analysis of the gran
 
 ## Phase III: Development
 
-Working in conjunction with a partner agency, the team will develop an initial prototype into a minimum viable product (MVP) focused on improving the grant reporting experience for grants managers or grantees at the federal level. This work will be informed by and in conversation with the ongoing data standards work taking place across the federal government.
+The team is building out a minimum viable product (MVP) focused on improving the single audit finding resolution experience for federal grant managers and grantees. This work is informed by and in conversation with several agencies as well as the ongoing data standards work taking place across the federal government.
+
 
 ## Important resources
 
 * Phase 3 [area of focus](https://docs.google.com/document/d/1qMXaHjQhaT4crKhMoXSnzQgBsjItdM94kILYJoSf-9Y/edit) (:lock:)
 * Phase 3 [timeline](https://docs.google.com/document/d/138eE7wCwZCrDpuHr4ufulan6bRByTlcZCnPOkpilgvA/edit#) (:lock:)
+
+
+## Contributing
+
+See [CONTRIBUTING](CONTRIBUTING.md) for additional information.
+
+
+## Public domain
+
+This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
+
+> This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+>
+> All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.

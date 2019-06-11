@@ -4,8 +4,6 @@ __pycache__
 db.sqlite3
 geckodriver.log
 
-**/settings.py
-
 # Ignore iPython/Jupyter notebook artifacts.
 **/*.ipynb
 **/.ipynb**

@@ -11,7 +11,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'FGR_LOCAL_DB',
-        'USER': 'FGR_LOCAL_USER',
+        'USER': 'fgr_local_user',
         'PASSWORD': 'SECRET',
         'HOST': '127.0.0.1',
         'PORT': '5432',

@@ -1,4 +1,5 @@
 {% extends 'resolve_findings/base.html' %}
+{% load static %}
 
 {% block body %}
   <div id="app_header" class="grid-row padding-y-5">
@@ -14,7 +15,12 @@
   <div id="finding_summary_header" class="grid-row margin-y-5 padding-y-205">
     <div class="grid-col-1"></div>
     <button class="usa-button lightblue-cool">
-      All Findings
+      <img src="{% static 'img/chevron-left.svg' %}"
+           alt="arrow left"
+           height="20"
+           class="float-left"
+           id="all_findings_chevron" />
+      <div id="all_findings_text" class="margin-x-1 float-left">All Findings</div>
     </button>
     <div id="grantee_name" class="margin-left-1 font-ui-lg">State of Z / #2018-02</div>
     <div class="grid-col-1"></div>

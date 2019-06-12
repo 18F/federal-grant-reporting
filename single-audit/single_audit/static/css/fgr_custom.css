@@ -17,6 +17,9 @@
   background-color: #122E51;
   font-size: 20px;
 }
+#all_findings_text {
+  line-height: 20px;
+}
 .section_title {
   background-color: #122E51;
 }

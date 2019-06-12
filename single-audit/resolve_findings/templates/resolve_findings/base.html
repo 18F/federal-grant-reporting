@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <title>Finding resolution page</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/uswds.min.css' %}">
+  <link rel="stylesheet" href="{% static 'uswds/uswds.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/fgr_custom.css' %}">
+  <link rel="stylesheet" href="{% static 'css/uswds_overrides.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900i&display=swap" rel="stylesheet">
   <title></title>
 </head>
@@ -16,7 +17,7 @@
       <header class="usa-banner__header">
         <div class="usa-banner__inner">
           <div class="grid-col-auto">
-            <img class="usa-banner__header-flag" src="assets/uswds-2.0.2/img/us_flag_small.png" alt="U.S. flag">
+            <img class="usa-banner__header-flag" src="{% static 'uswds/us_flag_small.png' %}" alt="U.S. flag">
           </div>
           <div class="grid-col-fill tablet:grid-col-auto">
             <p class="usa-banner__header-text">An official website of the United States government</p>
@@ -31,7 +32,7 @@
       <div class="usa-banner__content usa-accordion__content" id="gov-banner">
         <div class="grid-row grid-gap-lg">
           <div class="usa-banner__guidance tablet:grid-col-6">
-            <img class="usa-banner__icon usa-media-block__img" src="assets/uswds-2.0.2/img/icon-dot-gov.svg" alt="Dot gov">
+            <img class="usa-banner__icon usa-media-block__img" src="{% static 'uswds/icon-dot-gov.svg' %}" alt="Dot gov">
             <div class="usa-media-block__body">
               <p>
                 <strong>The .gov means it’s official.</strong>
@@ -41,7 +42,8 @@
             </div>
           </div>
           <div class="usa-banner__guidance tablet:grid-col-6">
-            <img class="usa-banner__icon usa-media-block__img" src="assets/uswds-2.0.2/img/icon-https.svg" alt="Https">
+            <img class="usa-banner__icon usa-media-block__img"
+            src="{% static 'uswds/icon-https.svg' %}" alt="Https">
             <div class="usa-media-block__body">
               <p>
                 <strong>The site is secure.</strong>
@@ -56,5 +58,5 @@
   </div>
    {% block body %}{% endblock %}
 </body>
-<script src="assets/uswds-2.0.2/js/uswds.min.js"></script>
+<script src="{% static 'uswds/uswds.min.js' %}"></script>
 </html>

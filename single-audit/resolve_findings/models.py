@@ -13,6 +13,17 @@ def validate_cfda_number(number):
     #        appropriate.
 
 
+class Grantee(models.Model):
+    name = models.CharField(max_length=250)
+    # grantors = models.ManyToManyField(Agency)
+
+    class Meta:
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name
+
+
 class Agency(models.Model):
     name = models.CharField(max_length=250)
     grantees = models.ManyToManyField(Grantee)
@@ -33,17 +44,6 @@ class Grant(models.Model):
 
     class Meta:
         ordering = ('cfda',)
-
-    def __str__(self):
-        return self.name
-
-
-class Grantee(models.Model):
-    name = models.CharField(max_length=250)
-    grantors = models.ManyToManyField(Agency)
-
-    class Meta:
-        ordering = ('name',)
 
     def __str__(self):
         return self.name
@@ -71,8 +71,8 @@ class Finding(models.Model):
     status = models.CharField(max_length=35,
                               choices=STATUS_TYPE_CHOICES,
                               default='new')
-    assignee = models.ForeignKey(User, related_name='findings')
-    grantee = models.ForeignKey(Grantee, related_name='findings')
+    # assignee = models.ForeignKey(User, related_name='findings', on_delete=models.CASCADE)
+    grantee = models.ForeignKey(Grantee, related_name='findings', on_delete=models.CASCADE, null=True)
     agencies_affected = models.ManyToManyField(Agency)
 
     class Meta:

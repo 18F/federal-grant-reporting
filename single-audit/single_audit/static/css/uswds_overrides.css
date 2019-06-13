@@ -16,6 +16,9 @@
   background-color: #E8E4E4;
   color: black;
 }
+.white-border.usa-button {
+  border: 4px solid white;
+}
 .usa-accordion__heading button {
   text-transform: uppercase;
   background-color: #E8EEF5;

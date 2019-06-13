@@ -151,10 +151,21 @@
           </div>
         </div>
         <div class="margin-bottom-1">
-          <div class="comment_summary padding-x-205 padding-y-105">
-            <label for="new_comment_textarea" class="text-bold">
-              New Comment
-            </label>
+          <div class="comment_summary padding-x-205 padding-y-105 clearfix">
+            <div class="float-left padding-top-1">
+              <label for="new_comment_textarea" class="text-bold">
+                New Comment
+              </label>
+            </div>
+            <div class="float-right">
+              <button class="lighter-gray white-border usa-button">
+                <span>Upload Files</span>
+                <img alt="link icon"
+                  src="{% static 'img/link-gray.svg' %}"
+                  height="16"
+                  class="margin-left-05" />
+              </button>
+            </div>
             <div>
               <textarea id="new_comment_textarea" class="big_textarea width-full margin-top-1"></textarea>
             </div>

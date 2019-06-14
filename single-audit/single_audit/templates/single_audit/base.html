@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Finding resolution page</title>
   {% load static %}
+  <meta charset="utf-8">
+  {% block css %}
   <link rel="stylesheet" href="{% static 'uswds/uswds.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/fgr_custom.css' %}">
   <link rel="stylesheet" href="{% static 'css/uswds_overrides.css' %}">
-  <title>
-    {% block title %}{% endblock %}
-    {{ site.name }}
-    {% block extra_title %}{% endblock %}
-  </title>
-  {% block viewport_meta %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
   {% endblock %}
-
+  <title></title>
+  {% block viewport_meta %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% endblock %}
   {# hat tip to USWDS... #}
   <!-- * * * * * ======================= -->
   <!-- * * * * * ======================= -->
@@ -76,3 +72,5 @@
 </body>
 <script src="{% static 'uswds/uswds.min.js' %}"></script>
 </html>
+{% block footer %}
+{% endblock %}

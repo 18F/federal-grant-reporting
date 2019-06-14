@@ -54,6 +54,8 @@ class Grant(models.Model):
 
 
 class Finding(models.Model):
+    objects = models.Manager()
+
     STATUS_TYPE_CHOICES = (
         ('new', 'New'),
         ('in_progress', 'In progress'),

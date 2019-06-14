@@ -84,6 +84,28 @@ The team is building out a minimum viable product (MVP) focused on improving the
 * Phase 3 [timeline](https://docs.google.com/document/d/138eE7wCwZCrDpuHr4ufulan6bRByTlcZCnPOkpilgvA/edit#) (:lock:)
 
 
+## Project structure
+
+```
+federal-grant-reporting/
+├── sam-to-ffr/
+├── single-audit/
+│   ├── distiller/
+│   ├── fac/
+│   ├── resolve_findings/
+│   └── single_audit/
+└── tools/
+```
+
+* `tools`: A home for one-off scripts written in service of the project.
+* `sam-to-ffr`: Flask prototype application from Phase II; a proof-of-concept app which fills out fields of the Federal Financial Report form based on data from SAM.gov.
+* `single-audit`: Main application being developed during Phase III; a Django project with several sub-apps.
+  * `single-audit/single_audit`: Home for project-wide resources and settings, such as shared CSS, URL structure, and shared settings for development/production.
+  * `single-audit/distiller`: Prototype app — exploring the idea of parsing data from the Federal Audit Clearinghouse and distilling it down into the most relevant information.
+  * `single-audit/fac`: Prototype app — exploring the idea of a front-end interface for the Federal Audit Clearinghouse which could let findings be entered in a templatized way.
+  * `single-audit/resolve_findings`: Prototype app for Single Audit Finding Resolution. Actively under development.
+
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md) for additional information.

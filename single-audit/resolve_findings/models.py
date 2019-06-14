@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 
 
@@ -11,6 +11,11 @@ def validate_cfda_number(number):
                                you provided is %s.' % number)
     # @todo: Determine and add remaining kinds of CFDA number validation, when
     #        appropriate.
+
+
+# https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
+class User(AbstractUser):
+    pass
 
 
 class Grantee(models.Model):

@@ -1,7 +1,7 @@
 {% extends 'single_audit/base.html' %}
 
 {% block content %}
-  <div class="grid-row">
+  <div class="usa-section grid-row">
     <div class="grid-col-1"></div>
     <div class="grid-col-3">
       <h1>Select your agency:</h1>
@@ -10,7 +10,7 @@
       <form action="/get-single-audits-by-agency/" method="post" class="usa-form">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="usa-button">
       </form>
     </div>
     <div class="grid-col-1"></div>

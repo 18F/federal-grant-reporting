@@ -13,7 +13,6 @@ psycopg2 = "*"
 psycopg2-binary = "*"
 django-localflavor = "*"
 pandas = "*"
-jupyter = "*"
 
 [requires]
 python_version = "3.7"

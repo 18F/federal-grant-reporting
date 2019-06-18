@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path
 # from fac import views  # @todo: Revisit, split out by app.
 from fac.views import get_single_audit_package
@@ -20,6 +21,7 @@ from distiller import views
 from resolve_findings.views import finding_resolution_page
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('fac', get_single_audit_package, name='FAC'),
     path('', views.prompt_for_agency_name, name='Distiller'),
     path('finding-resolution-page', finding_resolution_page),

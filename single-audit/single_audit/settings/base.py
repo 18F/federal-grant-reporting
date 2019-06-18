@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ALLOWED_HOSTS = []
 
+SECRET_KEY = 'SECRET'
 
 # Application definition
 
@@ -107,3 +108,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+
+
+AUTH_USER_MODEL = 'resolve_findings.User'

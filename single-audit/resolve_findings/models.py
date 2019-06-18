@@ -20,7 +20,6 @@ class User(AbstractUser):
 
 class Grantee(models.Model):
     name = models.CharField(max_length=250)
-    # grantors = models.ManyToManyField(Agency)
 
     class Meta:
         ordering = ('name',)
@@ -76,7 +75,6 @@ class Finding(models.Model):
     status = models.CharField(max_length=35,
                               choices=STATUS_TYPE_CHOICES,
                               default='new')
-    # assignee = models.ForeignKey(User, related_name='findings', on_delete=models.CASCADE)
     grantee = models.ForeignKey(Grantee, related_name='findings', on_delete=models.CASCADE, null=True)
     agencies_affected = models.ManyToManyField(Agency)
 

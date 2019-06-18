@@ -200,6 +200,52 @@
         <div class="margin-bottom-105 margin-top-1 text-bold">
           All activity
         </div>
+        <div id="notification_settings_container">
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker">
+            Notification Settings
+          </div>
+          <legend class="usa-sr-only">Notification Settings</legend>
+          <form class="usa-form">
+            <fieldset class="usa-fieldset">
+              <div class="padding-x-205 padding-y-2">
+                <div class="usa-radio">
+                  <input class="usa-radio__input"
+                         id="subscribed"
+                         type="radio"
+                         name="notification-settings"
+                         value="subscribed"
+                         checked>
+                  <label class="usa-radio__label" for="subscribed">All Activity</label>
+                </div>
+              </div>
+              <div class="usa-radio">
+                <input class="usa-radio__input"
+                       id="status-change"
+                       type="radio"
+                       name="notification-settings"
+                       value="status-change">
+                <label class="usa-radio__label" for="status-change">Status Change</label>
+              </div>
+              <div class="usa-radio">
+                <input class="usa-radio__input"
+                       id="resovled"
+                       type="radio"
+                       name="notification-settings"
+                       value="resovled">
+                <label class="usa-radio__label" for="resovled">Resolved</label>
+              </div>
+              <div class="usa-radio">
+                <input class="usa-radio__input"
+                       id="not-subscribed"
+                       type="radio"
+                       name="notification-settings"
+                       value="not-subscribed">
+                <label class="usa-radio__label" for="not-subscribed">Not Subscribed</label>
+              </div>
+              <button class="usa-button">Submit</button>
+          </fieldset>
+        </form>
+      </div>
       </div>
       <div class="sidebar_section padding-top-05 padding-bottom-3">
         <div class="sidebar_section_title text-uppercase padding-bottom-05">

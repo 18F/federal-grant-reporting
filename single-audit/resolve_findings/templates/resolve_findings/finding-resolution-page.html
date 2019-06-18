@@ -199,10 +199,11 @@
              height="18"
              class="float-right cursor_pointer" />
         </div>
-        <div class="margin-bottom-105 margin-top-1 text-bold">
+        <div id="notifications_content" class="margin-bottom-105 margin-top-1 text-bold">
           All Activity
         </div>
-        <div id="notifications_menu" class="shadow-3">
+        <!-- The menu for adjusting notifications defaults to being hidden visually, and can be toggled on/off visually using the gear icon. It should not be hidden to screen readers. -->
+        <div id="notifications_menu" class="shadow-2 margin-top-2">
           <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
             Notification Settings
           </div>
@@ -264,12 +265,14 @@
              src="{% static 'img/user-friends.svg' %}"
              height="16" />
           <span>Participants</span>
-          <img alt="gear icon"
+          <img
+             id="toggle_participants_menu_visible"
+             alt="gear icon"
              src="{% static 'img/cog-gray.svg' %}"
              height="18"
-             class="float-right" />
+             class="float-right cursor_pointer" />
         </div>
-        <div>
+        <div id="participants_content">
           <div class="margin-bottom-105 margin-top-1">
             <div class="text-bold">Robin Wordsmith</div>
             <div>[Grantee]</div>
@@ -285,6 +288,23 @@
           <div class="margin-bottom-105 margin-top-1">
             <div class="text-bold">Robert Walter, DHS</div>
             <div>[Observer]</div>
+          </div>
+        </div>
+        <!-- The menu for editing participants defaults to being hidden visually, and can be toggled on/off visually using the gear icon. It should not be hidden to screen readers. -->
+        <div id="participants_menu" class="shadow-2 margin-top-2">
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
+            Add Participant
+          </div>
+          <div class="padding-x-205 border-1px border-gray-30 border-top-width-0">
+            <fieldset class="usa-fieldset">
+              <label class="usa-label" for="participant-email">Email</label>
+              <input class="usa-input" id="participant-email" name="participant-email" type="email" />
+              <label class="usa-label" for="participant-org">Organization</label>
+              <input class="usa-input" id="participant-org" name="participant-org" type="text" />
+            </fieldset>
+            <div class="padding-x-205 padding-2 text-center">
+              <button class="usa-button no_margin_button">Add</button>
+            </div>
           </div>
         </div>
       </div>

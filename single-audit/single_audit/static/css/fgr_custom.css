@@ -38,3 +38,6 @@ textarea {
 .sidebar_section_title {
   border-bottom: 1px solid #0071BB;
 }
+.cursor_pointer {
+  cursor: pointer;
+}

@@ -19,6 +19,9 @@
 .white-border.usa-button {
   border: 4px solid white;
 }
+.usa-button.no_margin_button {
+  margin: 0 !important;
+}
 .usa-accordion__heading button {
   text-transform: uppercase;
   background-color: #E8EEF5;

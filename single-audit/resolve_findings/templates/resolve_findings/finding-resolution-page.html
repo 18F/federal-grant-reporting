@@ -192,33 +192,33 @@
              src="{% static 'img/bell.svg' %}"
              height="16" />
           <span>Notifications</span>
-          <img alt="gear icon"
+          <img
+             id="toggle_notifications_menu_visible"
+             alt="gear icon"
              src="{% static 'img/cog-gray.svg' %}"
              height="18"
-             class="float-right" />
+             class="float-right cursor_pointer" />
         </div>
         <div class="margin-bottom-105 margin-top-1 text-bold">
           All activity
         </div>
-        <div id="notification_settings_container">
-          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker">
+        <div id="notifications_menu" class="shadow-3">
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
             Notification Settings
           </div>
           <legend class="usa-sr-only">Notification Settings</legend>
           <form class="usa-form">
             <fieldset class="usa-fieldset">
-              <div class="padding-x-205 padding-y-2">
-                <div class="usa-radio">
-                  <input class="usa-radio__input"
-                         id="subscribed"
-                         type="radio"
-                         name="notification-settings"
-                         value="subscribed"
-                         checked>
-                  <label class="usa-radio__label" for="subscribed">All Activity</label>
-                </div>
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
+                <input class="usa-radio__input"
+                       id="subscribed"
+                       type="radio"
+                       name="notification-settings"
+                       value="subscribed"
+                       checked>
+                <label class="usa-radio__label" for="subscribed">All Activity</label>
               </div>
-              <div class="usa-radio">
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
                 <input class="usa-radio__input"
                        id="status-change"
                        type="radio"
@@ -226,7 +226,7 @@
                        value="status-change">
                 <label class="usa-radio__label" for="status-change">Status Change</label>
               </div>
-              <div class="usa-radio">
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
                 <input class="usa-radio__input"
                        id="resovled"
                        type="radio"
@@ -234,7 +234,7 @@
                        value="resovled">
                 <label class="usa-radio__label" for="resovled">Resolved</label>
               </div>
-              <div class="usa-radio">
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
                 <input class="usa-radio__input"
                        id="not-subscribed"
                        type="radio"
@@ -242,7 +242,9 @@
                        value="not-subscribed">
                 <label class="usa-radio__label" for="not-subscribed">Not Subscribed</label>
               </div>
-              <button class="usa-button">Submit</button>
+              <div class="padding-x-205 padding-2 border-1px border-gray-30 border-top-width-0">
+                <button class="usa-button no_margin_button">Submit</button>
+              </div>
           </fieldset>
         </form>
       </div>
@@ -280,4 +282,8 @@
     </div>
     <div class="grid-col-1"></div>
   </div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="{% static 'toggle_menus.js' %}"></script>
 {% endblock %}

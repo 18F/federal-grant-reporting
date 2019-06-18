@@ -2,7 +2,7 @@
 Sources:
 
 - https://accessibility.18f.gov/hidden-content/; see ".sr-only"
-- https://allyjs.io/tutorials/hiding-elements.html; ensee "2017 edition of .visuallyhidden"
+- https://allyjs.io/tutorials/hiding-elements.html; see "2017 edition of .visuallyhidden"
 */
 .visually_hidden {
   position: absolute;

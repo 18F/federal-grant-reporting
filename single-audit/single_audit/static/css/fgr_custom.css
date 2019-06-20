@@ -1,0 +1,49 @@
+#app_header {
+  border-bottom: 3px solid #E8EEF5;
+}
+#app_title {
+  color: #0071BC;
+}
+#logged_in_username {
+  align-self: center;
+}
+#finding_summary_header {
+  background-color: #E8EEF5;
+}
+#grantee_name {
+  align-self: center;
+}
+#finding_title {
+  background-color: #122E51;
+  font-size: 20px;
+}
+#all_findings_text {
+  line-height: 20px;
+}
+.section_title {
+  background-color: #122E51;
+}
+.comment_summary {
+  background-color: #E8E4E4;
+}
+textarea.big_textarea {
+  height: 140px;
+}
+textarea {
+  resize: none;
+}
+.sidebar_section {
+  border-top: 3px solid #0071BB;
+}
+.sidebar_section_title {
+  border-bottom: 1px solid #0071BB;
+}
+.cursor_pointer {
+  cursor: pointer;
+}
+.remove_participant_row {
+  cursor: pointer;
+}
+.remove_participant_row:hover {
+  background-color: #E8EEF5;
+}

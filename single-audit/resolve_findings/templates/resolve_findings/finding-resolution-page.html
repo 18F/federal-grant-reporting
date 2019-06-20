@@ -1,0 +1,341 @@
+{% extends 'single_audit/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div id="app_header" class="grid-row padding-y-5">
+    <div class="grid-col-1"></div>
+    <div class="grid-col-8">
+      <h1 id="app_title" class="font-serif-lg text-italic">Single Audit Resolution Solution</h1>
+    </div>
+    <div id="logged_in_username" class="grid-col-2">
+      <span class="text-middle">Tom Hammersmith</span>
+      <img alt="user icon"
+           src="{% static 'img/user-circle-gray.svg' %}"
+           height="24"
+           class="text-middle margin-x-05" />
+    </div>
+    <div class="grid-col-1"></div>
+  </div>
+  <div id="finding_summary_header" class="grid-row margin-y-5 padding-y-205">
+    <div class="grid-col-1"></div>
+    <button class="usa-button lightblue-cool">
+      <img src="{% static 'img/chevron-left.svg' %}"
+           alt="arrow left"
+           height="20"
+           class="float-left"
+           id="all_findings_chevron" />
+      <div id="all_findings_text" class="margin-x-1 float-left">All Findings</div>
+    </button>
+    <div id="grantee_name" class="margin-left-1 font-ui-lg">State of Z / #2018-02</div>
+    <div class="grid-col-1"></div>
+  </div>
+  <div id="main_content_area" class="grid-row">
+    <div class="grid-col-1"></div>
+    <div class="grid-col-7">
+      <div class="margin-bottom-4">
+        <div id="finding_title" class="margin-bottom-1 padding-205 text-italic text-white">
+          Information technology (IT) controls—access, configuration management, security, and contingency planning
+        </div>
+        <div class="margin-bottom-1">MDL Due: <span class="text-bold">05/13/19</span></div>
+        <div class="margin-bottom-1">Type of Finding: <span class="text-bold">Material Weakness</span></div>
+        <div class="margin-bottom-1">Prior Year Findings: <span class="text-bold"><a href="">2017-012</a></span></div>
+        <div class="margin-bottom-1">Cross-Cutting Findings: <span class="text-bold">DHS</span></div>
+      </div>
+      <div class="margin-bottom-4">
+        <div class="section_title padding-x-205 padding-y-1">
+          <span class="text-uppercase text-bold text-white">
+            Finding details
+          </span>
+        </div>
+        <div class="usa-accordion">
+          <!-- Use the accurate heading level to maintain the document outline -->
+          <h2 class="usa-accordion__heading">
+            <button class="usa-accordion__button"
+              aria-expanded="false"
+              aria-controls="a1">
+              Condition
+            </button>
+          </h2>
+          <div id="a1" class="usa-accordion__content usa-prose">
+            <p>We reviewed the access, configuration management, information technology security, and contingency-planning controls at 4 State agencies, including the Departments of Administration (ADOA), Economic Security (DES), Child Safety (DCS), and Revenue (DOR), and found that the agencies’ control procedures were not sufficiently designed, documented, and implemented to respond to risks associated with their IT systems and data. The agencies lacked adequate procedures over the following:  Restricting access to IT systems and data—Procedures did not consistently help prevent or detect unauthorized or inappropriate access. (ADOA, DES, DCS, DOR); Configuring systems securely and managing system changes—Procedures did not ensure IT systems were securely configured and all changes were adequately managed. (ADOA, DES, DOR); Securing systems and data—IT security policies and procedures lacked controls to prevent unauthorized or inappropriate access or use, manipulation, damage, or loss. (ADOA, DES, DOR); Developing and documenting or updating a contingency plan—Plan either was not in place for restoring operations in the event of a disaster or other system interruption or it lacked key elements necessary to succeed in restoring operations. (ADOA, DES, DOR)</p>
+          </div>
+          <!-- Use the accurate heading level to maintain the document outline -->
+          <h2 class="usa-accordion__heading">
+            <button class="usa-accordion__button"
+              aria-expanded="false"
+              aria-controls="a2">
+              Cause
+            </button>
+          </h2>
+          <div id="a2" class="usa-accordion__content usa-prose">
+            <p>TK</li></ul>
+          </div>
+          <!-- Use the accurate heading level to maintain the document outline -->
+          <h2 class="usa-accordion__heading">
+            <button class="usa-accordion__button"
+              aria-expanded="false"
+              aria-controls="a3">
+              Criteria
+            </button>
+          </h2>
+          <div id="a3" class="usa-accordion__content usa-prose">
+            <p>TK</p>
+          </div>
+          <!-- Use the accurate heading level to maintain the document outline -->
+          <h2 class="usa-accordion__heading">
+            <button class="usa-accordion__button"
+              aria-expanded="false"
+              aria-controls="a4">
+              Effect
+            </button>
+          </h2>
+          <div id="a4" class="usa-accordion__content usa-prose">
+            <p>TK</p>
+          </div>
+          <!-- Use the accurate heading level to maintain the document outline -->
+          <h2 class="usa-accordion__heading">
+            <button class="usa-accordion__button"
+              aria-expanded="false"
+              aria-controls="a5">
+              Recommendation
+            </button>
+          </h2>
+          <div id="a5" class="usa-accordion__content usa-prose">
+            <p>TK</p>
+          </div>
+        </div>
+      </div>
+      <div class="margin-bottom-4">
+        <div class="section_title padding-x-205 padding-y-1">
+          <span class="text-uppercase text-bold text-white">
+            Communication
+          </span>
+          <span class="usa-tag margin-x-05">3 comments</span>
+        </div>
+        <div class="margin-bottom-1">
+          <div class="comment_summary padding-x-205 padding-y-105">
+            <div><span class="text-bold">Robert Walter</span> | DHS | 5/11/19</div>
+          </div>
+          <div class="padding-x-3 padding-y-105">
+            This all looks good on our end. This relates to another finding that we have with the State of Z which we were able to close when they submitted additional documenation of actions taken and next steps.
+          </div>
+        </div>
+        <div class="margin-bottom-1">
+          <div class="comment_summary padding-x-205 padding-y-105 clearfix">
+            <div class="float-left"><span class="text-bold">Robin Wordsmith</span> | State of Z | 5/11/19</div>
+            <div class="float-right">
+              <span><a href="/">Documentation</a></span>
+              <img alt="link icon"
+                src="{% static 'img/link-gray.svg' %}"
+                height="16"
+                class="margin-left-05" />
+            </div>
+          </div>
+          <div class="padding-x-3 padding-y-105">
+            Please see the attached file with documentation of how we are working to remediate this issue. As Robert mentioned we had a similar finding with DHS that we have been able to resolve with this plan. Please let me know if DOL requires additional documentation of our steps taken.
+          </div>
+        </div>
+        <div class="margin-bottom-1">
+          <div class="comment_summary padding-x-205 padding-y-105 clearfix">
+            <div class="float-left"><span class="text-bold">John Smithfield</span> | DOL | 5/12/19</div>
+            <div class="float-right">
+              <span><a href="/">Conditions of Agreement</a></span>
+              <img alt="link icon"
+                src="{% static 'img/link-gray.svg' %}"
+                height="16"
+                class="margin-left-05" />
+            </div>
+          </div>
+          <div class="padding-x-3 padding-y-105">
+            Hi Robin, thanks for your file to support your corrective action. I’ve looked it over and will be closing this finding based on your attachment and the comments below. Please see the attached conditions that need to be followed in the coming year to aviod another repeat finding. Thanks.
+          </div>
+        </div>
+        <div class="margin-bottom-1">
+          <div class="comment_summary padding-x-205 padding-y-105 clearfix">
+            <div class="float-left padding-top-1">
+              <label for="new_comment_textarea" class="text-bold">
+                New Comment
+              </label>
+            </div>
+            <div>
+              <textarea id="new_comment_textarea" class="big_textarea width-full margin-top-1"></textarea>
+            </div>
+            <button class="usa-button float-right margin-y-1">
+              Comment and Resolve Finding
+            </button>
+            <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
+              <span>Upload Files</span>
+              <img alt="link icon"
+                src="{% static 'img/link-gray.svg' %}"
+                height="14"
+                class="margin-left-05" />
+            </button>
+            <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
+              Add Comment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-col-3 sidebar margin-x-5">
+      <div class="sidebar_section padding-top-05 padding-bottom-3">
+        <div class="sidebar_section_title text-uppercase padding-bottom-05">
+          <img alt="bell icon"
+             src="{% static 'img/bell.svg' %}"
+             height="16" />
+          <span>Notifications</span>
+          <img
+             id="toggle_notifications_menu_visible"
+             alt="gear icon"
+             src="{% static 'img/cog-gray.svg' %}"
+             height="18"
+             class="float-right cursor_pointer" />
+        </div>
+        <div id="notifications_content" class="margin-bottom-105 margin-top-1 text-bold">
+          All Activity
+        </div>
+        <!-- The menu for adjusting notifications defaults to being hidden visually, and can be toggled on/off visually using the gear icon. It should not be hidden to screen readers. -->
+        <div id="notifications_menu" class="shadow-2 margin-top-2">
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
+            Notification Settings
+          </div>
+          <legend class="usa-sr-only">Notification Settings</legend>
+          <form class="usa-form">
+            <fieldset class="usa-fieldset">
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
+                <input class="usa-radio__input"
+                       id="subscribed"
+                       type="radio"
+                       name="notification-settings"
+                       value="subscribed"
+                       checked>
+                <label class="usa-radio__label text-bold" for="subscribed">All Activity</label>
+                <!-- <div class="padding-left-4 padding-bottom-2 font-sans-xs">
+                  Receive notifications about this finding when there are comments, status changes, and resolution.
+                </div> -->
+              </div>
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
+                <input class="usa-radio__input"
+                       id="resovled"
+                       type="radio"
+                       name="notification-settings"
+                       value="resovled">
+                <label class="usa-radio__label text-bold" for="resovled">Resolved</label>
+                <div class="padding-left-4 padding-bottom-2 font-sans-xs">
+                  Receive a notification only when this issue has been resolved.
+                </div>
+              </div>
+              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
+                <input class="usa-radio__input"
+                       id="unsubscribe"
+                       type="radio"
+                       name="notification-settings"
+                       value="unsubscribe">
+                <label class="usa-radio__label text-bold" for="unsubscribe">Unsubscribe</label>
+              </div>
+              <div class="padding-x-205 padding-2 border-1px border-gray-30 border-top-width-0 text-center">
+                <button class="usa-button no_margin_button">Save Changes</button>
+              </div>
+          </fieldset>
+        </form>
+      </div>
+      </div>
+      <div class="sidebar_section padding-top-05 padding-bottom-3">
+        <div class="sidebar_section_title text-uppercase padding-bottom-05">
+          <img alt="people icon"
+             src="{% static 'img/user-friends.svg' %}"
+             height="16" />
+          <span>Participants</span>
+          <img
+             id="toggle_participants_menu_visible"
+             alt="gear icon"
+             src="{% static 'img/cog-gray.svg' %}"
+             height="18"
+             class="float-right cursor_pointer" />
+        </div>
+        <div id="participants_content">
+          <div class="margin-bottom-105 margin-top-1">
+            <div class="text-bold">Robin Wordsmith</div>
+            <div>[Grantee]</div>
+          </div>
+          <div class="margin-bottom-105 margin-top-1">
+            <div class="text-bold">John Smithfield, DOL</div>
+            <div>[POC, Cognizant Agency</div>
+          </div>
+          <div class="margin-bottom-105 margin-top-1">
+            <div class="text-bold">George Mathers, DHS</div>
+            <div>[POC, Non-Cog. Agency]</div>
+          </div>
+          <div class="margin-bottom-105 margin-top-1">
+            <div class="text-bold">Robert Walter, DHS</div>
+            <div>[Observer]</div>
+          </div>
+        </div>
+        <!-- The menu for editing participants defaults to being hidden visually, and can be toggled on/off visually using the gear icon. It should not be hidden to screen readers. -->
+        <div id="participants_menu" class="shadow-2 margin-top-2">
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
+            Add Participant
+          </div>
+          <div class="padding-x-205 border-1px border-gray-30 border-top-width-0">
+            <fieldset class="usa-fieldset">
+              <label class="usa-label" for="participant-email">Email</label>
+              <input class="usa-input" id="participant-email" name="participant-email" type="email" />
+              <label class="usa-label" for="participant-org">Organization</label>
+              <input class="usa-input" id="participant-org" name="participant-org" type="text" />
+            </fieldset>
+            <div class="padding-x-205 padding-2 text-center">
+              <button class="usa-button no_margin_button">Add</button>
+            </div>
+          </div>
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30 border-top-width-0">
+            Remove Participant
+          </div>
+          <div class="grid-row remove_participant_row padding-x-205 padding-y-2 border-1px border-gray-30 border-top-width-0">
+            <div class="grid-col-1">
+              <img
+               alt="cancel icon"
+               src="{% static 'img/times.svg' %}"
+               height="18"
+               class="margin-top-1" />
+            </div>
+            <div class="grid-col-11">
+              <div class="text-bold">John Smithfield, DOL</div>
+              <div>[POC, Cognizant Agency</div>
+            </div>
+          </div>
+          <div class="grid-row remove_participant_row padding-x-205 padding-y-2 border-1px border-gray-30 border-top-width-0">
+            <div class="grid-col-1">
+              <img
+                alt="cancel icon"
+                src="{% static 'img/times.svg' %}"
+                height="18"
+                class="margin-top-1" />
+            </div>
+            <div class="grid-col-11">
+              <div class="text-bold">George Mathers, DHS</div>
+              <div>[POC, Non-Cog. Agency]</div>
+            </div>
+          </div>
+          <div class="grid-row remove_participant_row padding-x-205 padding-y-2 border-1px border-gray-30 border-top-width-0">
+            <div class="grid-col-1">
+              <img
+                alt="cancel icon"
+                src="{% static 'img/times.svg' %}"
+                height="18"
+                class="margin-top-1" />
+            </div>
+            <div class="grid-col-11">
+              <div class="text-bold">Robert Walter, DHS</div>
+              <div>[Observer]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-col-1"></div>
+  </div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="{% static 'toggle_menus.js' %}"></script>
+{% endblock %}

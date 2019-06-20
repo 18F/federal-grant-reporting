@@ -12,7 +12,6 @@ jinja2 = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
 django-localflavor = "*"
-designstandards = {editable = true,git = "https://github.com/department-of-veterans-affairs/django-designstandards.git"}
 pandas = "*"
 
 [requires]

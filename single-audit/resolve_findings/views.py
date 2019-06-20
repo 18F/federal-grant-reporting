@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def finding_resolution_page(request):
+    return render(request, 'resolve_findings/finding-resolution-page.html')

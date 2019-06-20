@@ -157,31 +157,23 @@
                 New Comment
               </label>
             </div>
-            <div class="float-right">
-              <button class="lighter-gray white-border usa-button">
-                <span>Upload Files</span>
-                <img alt="link icon"
-                  src="{% static 'img/link-gray.svg' %}"
-                  height="16"
-                  class="margin-left-05" />
-              </button>
-            </div>
             <div>
               <textarea id="new_comment_textarea" class="big_textarea width-full margin-top-1"></textarea>
             </div>
+            <button class="usa-button float-right margin-y-1">
+              Comment and Resolve Finding
+            </button>
+            <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
+              <span>Upload Files</span>
+              <img alt="link icon"
+                src="{% static 'img/link-gray.svg' %}"
+                height="14"
+                class="margin-left-05" />
+            </button>
+            <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
+              Add Comment
+            </button>
           </div>
-        </div>
-        <div class="width-full clearfix">
-          <button id="add_comment" class="lighter-gray usa-button float-right">
-            Add Comment
-          </button>
-        </div>
-      </div>
-      <div class="margin-y-4">
-        <div class="float-right">
-          <button class="usa-button">
-            Resolve Finding
-          </button>
         </div>
       </div>
     </div>

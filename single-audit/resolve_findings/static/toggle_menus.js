@@ -5,13 +5,26 @@ function visuallyToggle(elem) {
   // support the feature will show the menu with no toggleability.
   elem.classList.toggle("visually_hidden");
 }
+
 var notificationsMenu = document.getElementById("notifications_menu");
 var toggleNotifications = document.getElementById("toggle_notifications_menu_visible");
+var notificationsContent = document.getElementById("notifications_content");
 
-// Hide menu on page load with JS
+var participantsMenu = document.getElementById("participants_menu");
+var toggleParticipants = document.getElementById("toggle_participants_menu_visible");
+var participantsContent = document.getElementById("participants_content");
+
+// Hide menus on page load
 visuallyToggle(notificationsMenu);
+visuallyToggle(participantsMenu);
 
 toggleNotifications.addEventListener("click", function() {
   visuallyToggle(notificationsMenu);
+  visuallyToggle(notificationsContent);
+});
+
+toggleParticipants.addEventListener("click", function() {
+  visuallyToggle(participantsMenu);
+  visuallyToggle(participantsContent);
 });
 

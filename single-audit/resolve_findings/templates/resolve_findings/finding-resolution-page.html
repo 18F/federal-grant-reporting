@@ -199,10 +199,11 @@
              height="18"
              class="float-right cursor_pointer" />
         </div>
-        <div class="margin-bottom-105 margin-top-1 text-bold">
-          All activity
+        <div id="notifications_content" class="margin-bottom-105 margin-top-1 text-bold">
+          All Activity
         </div>
-        <div id="notifications_menu" class="shadow-3">
+        <!-- The menu for adjusting notifications defaults to being hidden visually, and can be toggled on/off visually using the gear icon. It should not be hidden to screen readers. -->
+        <div id="notifications_menu" class="shadow-2 margin-top-2">
           <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
             Notification Settings
           </div>
@@ -216,15 +217,10 @@
                        name="notification-settings"
                        value="subscribed"
                        checked>
-                <label class="usa-radio__label" for="subscribed">All Activity</label>
-              </div>
-              <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
-                <input class="usa-radio__input"
-                       id="status-change"
-                       type="radio"
-                       name="notification-settings"
-                       value="status-change">
-                <label class="usa-radio__label" for="status-change">Status Change</label>
+                <label class="usa-radio__label text-bold" for="subscribed">All Activity</label>
+                <!-- <div class="padding-left-4 padding-bottom-2 font-sans-xs">
+                  Receive notifications about this finding when there are comments, status changes, and resolution.
+                </div> -->
               </div>
               <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
                 <input class="usa-radio__input"
@@ -232,18 +228,21 @@
                        type="radio"
                        name="notification-settings"
                        value="resovled">
-                <label class="usa-radio__label" for="resovled">Resolved</label>
+                <label class="usa-radio__label text-bold" for="resovled">Resolved</label>
+                <div class="padding-left-4 padding-bottom-2 font-sans-xs">
+                  Receive a notification only when this issue has been resolved.
+                </div>
               </div>
               <div class="usa-radio padding-x-205 padding-top-2 border-1px border-gray-30 border-top-width-0">
                 <input class="usa-radio__input"
-                       id="not-subscribed"
+                       id="unsubscribe"
                        type="radio"
                        name="notification-settings"
-                       value="not-subscribed">
-                <label class="usa-radio__label" for="not-subscribed">Not Subscribed</label>
+                       value="unsubscribe">
+                <label class="usa-radio__label text-bold" for="unsubscribe">Unsubscribe</label>
               </div>
               <div class="padding-x-205 padding-2 border-1px border-gray-30 border-top-width-0">
-                <button class="usa-button no_margin_button">Submit</button>
+                <button class="usa-button no_margin_button">Save</button>
               </div>
           </fieldset>
         </form>
@@ -255,12 +254,14 @@
              src="{% static 'img/user-friends.svg' %}"
              height="16" />
           <span>Participants</span>
-          <img alt="gear icon"
+          <img
+             id="toggle_participants_menu_visible"
+             alt="gear icon"
              src="{% static 'img/cog-gray.svg' %}"
              height="18"
-             class="float-right" />
+             class="float-right cursor_pointer" />
         </div>
-        <div>
+        <div id="participants_content">
           <div class="margin-bottom-105 margin-top-1">
             <div class="text-bold">Robin Wordsmith</div>
             <div>[Grantee]</div>
@@ -276,6 +277,47 @@
           <div class="margin-bottom-105 margin-top-1">
             <div class="text-bold">Robert Walter, DHS</div>
             <div>[Observer]</div>
+          </div>
+        </div>
+        <!-- The menu for editing participants defaults to being hidden visually, and can be toggled on/off visually using the gear icon. It should not be hidden to screen readers. -->
+        <div id="participants_menu" class="shadow-2 margin-top-2">
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30">
+            Add Participant
+          </div>
+          <div class="padding-x-205 border-1px border-gray-30 border-top-width-0">
+            <fieldset class="usa-fieldset">
+              <label class="usa-label" for="participant-email">Email</label>
+              <input class="usa-input" id="participant-email" name="participant-email" type="email" />
+              <label class="usa-label" for="participant-org">Organization</label>
+              <input class="usa-input" id="participant-org" name="participant-org" type="text" />
+            </fieldset>
+            <div class="padding-x-205 padding-2 text-center">
+              <button class="usa-button no_margin_button">Add</button>
+            </div>
+          </div>
+          <div class="sidebar_settings_header text-uppercase bg-base-lighter padding-x-205 padding-y-105 text-bold text-base-darker border-1px border-gray-30 border-top-width-0">
+            Remove Participant
+          </div>
+          <div class="grid-row remove_participant_row padding-x-205 padding-y-2 border-1px border-gray-30 border-top-width-0">
+            <div class="grid-col-1">x</div>
+            <div class="grid-col-11">
+              <div class="text-bold">John Smithfield, DOL</div>
+              <div>[POC, Cognizant Agency</div>
+            </div>
+          </div>
+          <div class="grid-row remove_participant_row padding-x-205 padding-y-2 border-1px border-gray-30 border-top-width-0">
+            <div class="grid-col-1">x</div>
+            <div class="grid-col-11">
+              <div class="text-bold">George Mathers, DHS</div>
+              <div>[POC, Non-Cog. Agency]</div>
+            </div>
+          </div>
+          <div class="grid-row remove_participant_row padding-x-205 padding-y-2 border-1px border-gray-30 border-top-width-0">
+            <div class="grid-col-1">x</div>
+            <div class="grid-col-11">
+              <div class="text-bold">Robert Walter, DHS</div>
+              <div>[Observer]</div>
+            </div>
           </div>
         </div>
       </div>

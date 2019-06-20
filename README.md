@@ -69,7 +69,7 @@ To access the admin interface, you'll need to create a superuser first. Run the 
 
 You will be prompted to supply a username, email, and password.
 
-Once your superuser is set up, you will be able to access the admin interface at `/admin` using your new superuser account.
+Having completed that process, you will be able to access the admin interface at `/admin` using your new superuser account.
 
 ## Background
 

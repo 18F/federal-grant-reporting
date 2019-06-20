@@ -20,7 +20,7 @@ visuallyToggle(participantsMenu);
 
 toggleNotifications.addEventListener("click", function() {
   visuallyToggle(notificationsMenu);
-  visuallyToggle(notificationsContent)
+  visuallyToggle(notificationsContent);
 });
 
 toggleParticipants.addEventListener("click", function() {

@@ -102,7 +102,7 @@ federal-grant-reporting/
 * `single-audit`: Main application being developed during Phase III; a Django project with several sub-apps.
   * `single-audit/single_audit`: Home for project-wide resources and settings, such as shared CSS, URL structure, and shared settings for development/production.
   * `single-audit/distiller`: Prototype app — exploring the idea of parsing data from the Federal Audit Clearinghouse and distilling it down into the most relevant information.
-  * `single-audit/fac`: Prototype app — exploring the idea of a front-end interface for the Federal Audit Clearinghouse which could let findings be entered in a templatized way.
+  * `single-audit/fac`: Prototype app — exploring the idea of a front-end interface for the Federal Audit Clearinghouse which could let findings be entered in a templatized way. This is currently a stub (i.e., very much an early work in progress).
   * `single-audit/resolve_findings`: Prototype app for Single Audit Finding Resolution. Actively under development.
 
 

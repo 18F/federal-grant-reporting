@@ -33,9 +33,11 @@
     <div class="grid-col-1"></div>
     <div class="grid-col-7">
       <div class="margin-bottom-4">
-        <div id="finding_title" class="margin-bottom-1 padding-205 text-italic text-white">
-          Information technology (IT) controls—access, configuration management, security, and contingency planning
-        </div>
+        {% block title %}
+          <div id="finding_title" class="margin-bottom-1 padding-205 text-italic text-white">
+            {{ finding.name }}
+          </div>
+        {% endblock %}
         <div class="margin-bottom-1">MDL Due: <span class="text-bold">05/13/19</span></div>
         <div class="margin-bottom-1">Type of Finding: <span class="text-bold">Material Weakness</span></div>
         <div class="margin-bottom-1">Prior Year Findings: <span class="text-bold"><a href="">2017-012</a></span></div>

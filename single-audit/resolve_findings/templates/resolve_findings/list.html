@@ -1,0 +1,17 @@
+<!-- @todo: ADD USWDS CLASSES! -->
+
+{% extends 'single_audit/base.html' %}
+
+{% block title %}Findings{% endblock %}
+
+{% block content %}
+  <h1>Findings</h1>
+  {% for finding in findings %}
+    <h2>
+      <a href="{{ finding.get_absolute_url }}">
+        {{ finding.name }}
+        <!-- @todo: Consider changing 'name' to 'title'. -->
+      </a>
+    </h2>
+  {% endfor %}
+{% endblock %}

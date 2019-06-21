@@ -53,7 +53,17 @@ class Grant(models.Model):
         return self.name
 
 
+class NewFindingManager(models.Manager):
+    def get_queryset(self):
+        return super(NewFindingManager,
+                     self).get_queryset()\
+                     .filter(status='new')
+
+
 class Finding(models.Model):
+    objects = models.Manager()
+    new = NewFindingManager()
+
     STATUS_TYPE_CHOICES = (
         ('new', 'New'),
         ('in_progress', 'In progress'),

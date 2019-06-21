@@ -26,7 +26,7 @@
            id="all_findings_chevron" />
       <div id="all_findings_text" class="margin-x-1 float-left">All Findings</div>
     </button>
-    <div id="grantee_name" class="margin-left-1 font-ui-lg">State of Z / #2018-02</div>
+    <div id="grantee_name" class="margin-left-1 font-ui-lg">{{ finding.grantee }} / #{{ finding.number }}</div>
     <div class="grid-col-1"></div>
   </div>
   <div id="main_content_area" class="grid-row">
@@ -39,7 +39,7 @@
           </div>
         {% endblock %}
         <div class="margin-bottom-1">MDL Due: <span class="text-bold">05/13/19</span></div>
-        <div class="margin-bottom-1">Type of Finding: <span class="text-bold">Material Weakness</span></div>
+        <div class="margin-bottom-1">Type of Finding: <span class="text-bold">{{ finding.finding_type }}</span></div>
         <div class="margin-bottom-1">Prior Year Findings: <span class="text-bold"><a href="">2017-012</a></span></div>
         <div class="margin-bottom-1">Cross-Cutting Findings: <span class="text-bold">DHS</span></div>
       </div>
@@ -59,7 +59,7 @@
             </button>
           </h2>
           <div id="a1" class="usa-accordion__content usa-prose">
-            <p>We reviewed the access, configuration management, information technology security, and contingency-planning controls at 4 State agencies, including the Departments of Administration (ADOA), Economic Security (DES), Child Safety (DCS), and Revenue (DOR), and found that the agencies’ control procedures were not sufficiently designed, documented, and implemented to respond to risks associated with their IT systems and data. The agencies lacked adequate procedures over the following:  Restricting access to IT systems and data—Procedures did not consistently help prevent or detect unauthorized or inappropriate access. (ADOA, DES, DCS, DOR); Configuring systems securely and managing system changes—Procedures did not ensure IT systems were securely configured and all changes were adequately managed. (ADOA, DES, DOR); Securing systems and data—IT security policies and procedures lacked controls to prevent unauthorized or inappropriate access or use, manipulation, damage, or loss. (ADOA, DES, DOR); Developing and documenting or updating a contingency plan—Plan either was not in place for restoring operations in the event of a disaster or other system interruption or it lacked key elements necessary to succeed in restoring operations. (ADOA, DES, DOR)</p>
+            <p>{{ finding.condition }}</p>
           </div>
           <!-- Use the accurate heading level to maintain the document outline -->
           <h2 class="usa-accordion__heading">
@@ -70,7 +70,7 @@
             </button>
           </h2>
           <div id="a2" class="usa-accordion__content usa-prose">
-            <p>TK</li></ul>
+            <p>{{ finding.cause }}</p>
           </div>
           <!-- Use the accurate heading level to maintain the document outline -->
           <h2 class="usa-accordion__heading">
@@ -81,7 +81,7 @@
             </button>
           </h2>
           <div id="a3" class="usa-accordion__content usa-prose">
-            <p>TK</p>
+            <p>{{ finding.criteria }}</p>
           </div>
           <!-- Use the accurate heading level to maintain the document outline -->
           <h2 class="usa-accordion__heading">
@@ -92,7 +92,7 @@
             </button>
           </h2>
           <div id="a4" class="usa-accordion__content usa-prose">
-            <p>TK</p>
+            <p>{{ finding.effect }}</p>
           </div>
           <!-- Use the accurate heading level to maintain the document outline -->
           <h2 class="usa-accordion__heading">
@@ -103,7 +103,7 @@
             </button>
           </h2>
           <div id="a5" class="usa-accordion__content usa-prose">
-            <p>TK</p>
+            <p>{{ finding.recommendation }}</p>
           </div>
         </div>
       </div>

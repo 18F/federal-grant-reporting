@@ -75,6 +75,11 @@ class Finding(models.Model):
     )
     name = models.CharField(max_length=250)
     number = models.CharField(max_length=35)
+    finding_type = models.CharField(
+        max_length=100,
+        choices=FINDING_TYPE_CHOICES,
+        default='material_weakness'
+    )
     condition = models.TextField()
     cause = models.TextField()
     criteria = models.TextField()

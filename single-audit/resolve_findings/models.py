@@ -87,10 +87,17 @@ class Finding(models.Model):
     recommendation = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=35,
-                              choices=STATUS_TYPE_CHOICES,
-                              default='new')
-    grantee = models.ForeignKey(Grantee, related_name='findings', on_delete=models.CASCADE, null=True)
+    status = models.CharField(
+        max_length=35,
+        choices=STATUS_TYPE_CHOICES,
+        default='new'
+    )
+    grantee = models.ForeignKey(
+        Grantee,
+        related_name='findings',
+        on_delete=models.CASCADE,
+        null=True
+    )
     agencies_affected = models.ManyToManyField(Agency)
 
     class Meta:

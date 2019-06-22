@@ -97,7 +97,12 @@
           <span class="text-uppercase text-bold text-white">
             Communication
           </span>
-          <span class="usa-tag margin-x-05">3 comments</span>
+
+          {% with comments.count as total_comments %}
+            <span class="usa-tag margin-x-05">
+              {{ total_comments }} comment{{ total_comments|pluralize }}
+            </span>
+          {% endwith %}
         </div>
         <div class="margin-bottom-1">
           <div class="comment_summary padding-x-205 padding-y-105">

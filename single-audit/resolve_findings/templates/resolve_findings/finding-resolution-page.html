@@ -119,6 +119,36 @@
             </span>
           {% endwith %}
         </div>
+
+        <!-- @alexsoble, what would you think of this subsection (comments)
+             having its own div? -->
+        {% for comment in comments %}
+          <div class="comment_summary padding-x-205 padding-y-105 clearfix">
+            <!-- @todo (@fureigh): Format/transform publication date appropriately. -->
+            <!-- @todo (@fureigh): Extract agency name from 'author' (User).
+                 Requires first either 1) adding that field or 2) (preferable in
+                 the long run:) incorporating Login.gov and reverse engineering
+                 it from the email address. -->
+            <div>
+              <span class="text-bold">{{ comment.author }}</span> | DHS | {{ comment.created }}
+            </div>
+            {{ comment.body|linebreaks }}
+          </div>
+
+        {% if new_comment %}
+          <h2>Your comment has been added.</h2>
+          <!-- @todo: Ask @bpdesigns whether he designed those kinds of confirmations.
+                      And ask @alexsoble to USWDS-ify them. -->
+          {% else %}
+            <h2>Add a new comment</h2>
+            <form action="." method="post">
+              {{ comment_form.as_p }}
+              {% csrf_token %}
+              <!-- @todo: Update me to match the mockup! :) -->
+              <p><input type="submit" value="Add comment"></p>
+            </form>
+        {% endif %}
+
         <div class="margin-bottom-1">
           <div class="comment_summary padding-x-205 padding-y-105">
             <div><span class="text-bold">Robert Walter</span> | DHS | 5/11/19</div>

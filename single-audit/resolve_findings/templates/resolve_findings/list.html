@@ -2,10 +2,12 @@
 <!-- @todo: ADD USWDS CLASSES! -->
 
 {% extends 'single_audit/base.html' %}
+{% load static %}
 
 {% block title %}Findings{% endblock %}
 
 {% block content %}
+  {% include 'single_audit/logged_in_user.html' %}
   <h1>Findings</h1>
   {% for finding in findings %}
     <h2>

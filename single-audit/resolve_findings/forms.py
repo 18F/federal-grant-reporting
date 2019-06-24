@@ -12,3 +12,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'body': forms.Textarea(attrs={'class': 'big_textarea width-full margin-top-1'}),
         }
+
+        labels = {
+            'body': '' # Custom label for comment body rendered in finding-resolution-page.html.
+        }

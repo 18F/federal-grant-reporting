@@ -136,20 +136,6 @@
           </div>
         {% endfor %}
 
-        {% if new_comment %}
-          <h2>Your comment has been added.</h2>
-          <!-- @todo: Ask @bpdesigns whether he designed those kinds of confirmations.
-                      And ask @alexsoble to USWDS-ify them. -->
-          {% else %}
-            <h2>Add a new comment</h2>
-            <form action="." method="post">
-              {{ comment_form.as_p }}
-              {% csrf_token %}
-              <!-- @todo: Update me to match the mockup! :) -->
-              <p><input type="submit" value="Add comment"></p>
-            </form>
-        {% endif %}
-
         <div class="margin-bottom-1">
           <div class="comment_summary padding-x-205 padding-y-105">
             <div><span class="text-bold">Robert Walter</span> | DHS | 5/11/19</div>
@@ -188,31 +174,38 @@
             Hi Robin, thanks for your file to support your corrective action. I’ve looked it over and will be closing this finding based on your attachment and the comments below. Please see the attached conditions that need to be followed in the coming year to aviod another repeat finding. Thanks.
           </div>
         </div>
-        <div class="margin-bottom-1">
+        {% if new_comment %}
+          <h2>Your comment has been added.</h2>
+          <!-- @todo: Ask @bpdesigns whether he designed those kinds of confirmations.
+                      And ask @alexsoble to USWDS-ify them. -->
+        {% else %}
           <div class="comment_summary padding-x-205 padding-y-105 clearfix">
             <div class="float-left padding-top-1">
               <label for="new_comment_textarea" class="text-bold">
                 New Comment
               </label>
             </div>
-            <div>
+            <form action="." method="post">
+              {{ comment_form.as_p }}
+              {% csrf_token %}
               <textarea id="new_comment_textarea" class="big_textarea width-full margin-top-1"></textarea>
-            </div>
-            <button class="usa-button float-right margin-y-1">
-              Comment and Resolve Finding
-            </button>
-            <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
-              Add Comment
-            </button>
-            <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
-              <span>Upload Files</span>
-              <img alt="link icon"
-                src="{% static 'img/link-gray.svg' %}"
-                height="14"
-                class="margin-left-05" />
-            </button>
+              <button class="usa-button float-right margin-y-1">
+                Comment and Resolve Finding
+              </button>
+              <button type="submit"
+                      class="usa-button float-right margin-y-1 usa-button--outline bg-white">
+                Add Comment
+              </button>
+              <button class="usa-button float-right margin-y-1 usa-button--outline bg-white">
+                <span>Upload Files</span>
+                <img alt="link icon"
+                  src="{% static 'img/link-gray.svg' %}"
+                  height="14"
+                  class="margin-left-05" />
+              </button>
+            </form>
           </div>
-        </div>
+        {% endif %}
       </div>
     </div>
     <div class="grid-col-3 sidebar margin-x-5">

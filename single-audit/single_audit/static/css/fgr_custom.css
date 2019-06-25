@@ -1,3 +1,5 @@
+/* Finding Resolution Page */
+
 #app_header {
   border-bottom: 3px solid #E8EEF5;
 }
@@ -46,4 +48,20 @@ textarea {
 }
 .remove_participant_row:hover {
   background-color: #E8EEF5;
+}
+
+/* Findings Overview Page */
+
+#overview_nav {
+  background-color: #E8EEF5;
+}
+
+#overview_nav .overview_nav_button {
+  height: 100%;
+  vertical-align: center;
+  line-height: 80px;
+}
+
+#overview_nav .overview_nav_button.selected {
+  background-color: white;
 }

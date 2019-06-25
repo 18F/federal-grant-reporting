@@ -8,13 +8,26 @@
 
 {% block content %}
   {% include 'single_audit/logged_in_user.html' %}
-  <h1>Findings</h1>
-  {% for finding in findings %}
-    <h2>
-      <a href="{{ finding.get_absolute_url }}">
-        {{ finding.name }}
-        <!-- @todo: Consider changing 'name' to 'title'. -->
-      </a>
-    </h2>
-  {% endfor %}
+  <div id="overview_nav" class="grid-row height-10 margin-y-5">
+    <div class="grid-col-1"></div>
+    <div class="overview_nav_button grid-col-2 text-center selected">Assigned to me</div>
+    <div class="overview_nav_button grid-col-2 text-center">I'm watching</div>
+    <div class="overview_nav_button grid-col-2 text-center">All my agency's findings</div>
+    <div class="grid-col-1"></div>
+  </div>
+  <div id="main_content_area" class="grid-row">
+    <div class="grid-col-1"></div>
+    <div class="grid-col-10">
+      <h1>Findings</h1>
+      {% for finding in findings %}
+        <h2>
+          <a href="{{ finding.get_absolute_url }}">
+            {{ finding.name }}
+            <!-- @todo: Consider changing 'name' to 'title'. -->
+          </a>
+        </h2>
+      {% endfor %}
+    </div>
+    <div class="grid-col-1"></div>
+  </div>
 {% endblock %}

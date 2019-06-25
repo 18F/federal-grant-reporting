@@ -81,12 +81,13 @@ Start by adding a new Finding record: http://127.0.0.1:8000/admin/resolve_findin
 
 Once your new finding record is saved, visit http://127.0.0.1:8000/finding/1/ to see the Finding Resolution Page.
 
-Here's what that page looks like as of June 2019:
+Here is what that page looks like as of June 2019:
 
+![screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/59533745-04f50480-8eb2-11e9-9dab-1ecdd3498b43.png)
 
+... and here is what the comments section looks like as of June 2019:
 
-
-
+![another screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/59533852-500f1780-8eb2-11e9-9665-d43b4a349131.png)
 
 ## Background
 

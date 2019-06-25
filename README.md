@@ -75,7 +75,7 @@ Having completed that process, you will be able to access the admin interface at
 
 Once you can access the admin interface for the project, you'll be able to create fake finding data locally.
 
-Start by adding a new Finding record: http://127.0.0.1:8000/admin/resolve_findings/finding/add/.
+Start by adding and saving a new Finding record: http://127.0.0.1:8000/admin/resolve_findings/finding/add/.
 
 ### See the project locally
 

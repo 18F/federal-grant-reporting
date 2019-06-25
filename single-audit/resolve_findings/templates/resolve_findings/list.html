@@ -17,7 +17,7 @@
   </div>
   <div id="main_content_area" class="grid-row">
     <div class="grid-col-1"></div>
-    <div class="grid-col-10">
+    <div class="grid-col-8">
       <h1>Findings</h1>
       {% for finding in findings %}
         <h2>
@@ -27,6 +27,30 @@
           </a>
         </h2>
       {% endfor %}
+    </div>
+    <div class="grid-col-2">
+      <div class="sidebar_section padding-top-05 padding-bottom-3">
+        <div class="padding-y-05">My agency is:</div>
+        <div class="padding-y-1">
+          <input type="checkbox" id="cognizant" />
+          <label for="cognizant">cognizant</label>
+        </div>
+        <div class="padding-y-1">
+          <input type="checkbox" id="non-cognizant" />
+          <label for="non-cognizant">non-cognizant</label>
+        </div>
+      </div>
+      <div class="sidebar_section padding-top-05 padding-bottom-3">
+        <div class="padding-y-05">Show finding types:</div>
+        <div class="padding-y-1">
+          <input type="checkbox" id="resolved" />
+          <label for="resolved">resolved</label>
+        </div>
+        <div class="padding-y-1">
+          <input type="checkbox" id="unresolved" />
+          <label for="unresolved">unresolved</label>
+        </div>
+      </div>
     </div>
     <div class="grid-col-1"></div>
   </div>

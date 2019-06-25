@@ -30,7 +30,7 @@
             <th>Assigned</th>
             <th>Finding # | Grantee</th>
             <th>MDL due</th>
-            <th>Sort</th>
+            <th><!-- NOTE (ARS): This header should say "Sort" when sort functionality is implemented. --></th>
           </tr>
         </thead>
         <tbody>
@@ -50,7 +50,14 @@
             <td class="text-gray-50">
               Nov 13
             </td>
-            <td class="text-gray-50">3</td>
+            <td class="text-gray-50">
+              3
+              <img alt="comment icon"
+                src="{% static 'img/comment-alt-gray.svg' %}"
+                height="14"
+                class="margin-left-05"
+                style="position: relative; top: 2px;" />
+            </td>
           </tr>
         </tbody>
 

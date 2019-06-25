@@ -57,11 +57,40 @@ textarea {
 }
 
 #overview_nav .overview_nav_button {
-  height: 100%;
-  vertical-align: center;
-  line-height: 80px;
+  background-color: #E8EEF5;
+
+  /* Vertical centering for tab text with flexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 480px) {
+  #overview_nav {
+    height: 80px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #overview_nav .overview_nav_button {
+    padding: 10px 0;
+  }
 }
 
 #overview_nav .overview_nav_button.selected {
   background-color: white;
+}
+
+/* Findings Overview table overrides*/
+
+#findings_overview_table {
+  border: 1px solid #E8E4E4;
+}
+
+#findings_overview_table thead tr th {
+  text-align: left;
+}
+
+#findings_overview_table th, #findings_overview_table td {
+  padding: 4px; /* Equivalent to USWDS Utility .padding-05 */
 }

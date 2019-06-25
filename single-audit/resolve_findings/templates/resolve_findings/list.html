@@ -10,23 +10,44 @@
   {% include 'single_audit/logged_in_user.html' %}
   <div id="overview_nav" class="grid-row height-10 margin-y-5">
     <div class="grid-col-1"></div>
-    <div class="overview_nav_button grid-col-2 text-center selected">Assigned to me</div>
-    <div class="overview_nav_button grid-col-2 text-center">I'm watching</div>
-    <div class="overview_nav_button grid-col-2 text-center">All my agency's findings</div>
+    <div class="overview_nav_button mobile-lg:grid-col-2 text-center selected">
+      Assigned to me
+    </div>
+    <div class="overview_nav_button mobile-lg:grid-col-2 text-center">
+      I'm watching
+    </div>
+    <div class="overview_nav_button mobile-lg:grid-col-2 text-center">
+      All my agency's findings
+    </div>
     <div class="grid-col-1"></div>
   </div>
   <div id="main_content_area" class="grid-row">
     <div class="grid-col-1"></div>
     <div class="grid-col-8">
-      <h1>Findings</h1>
-      {% for finding in findings %}
-        <h2>
+      <table id="findings_overview_table" class="margin-right-5">
+        <thead>
+          <tr>
+            <th>Assigned</th>
+            <th>Finding # | Grantee</th>
+            <th>MDL due</th>
+            <th>Sort</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GM</td>
+            <td>2018-15 | Commonwealth of Massachusetts</td>
+            <td>Nov 13</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+
+         {% for finding in findings %}
           <a href="{{ finding.get_absolute_url }}">
             {{ finding.name }}
-            <!-- @todo: Consider changing 'name' to 'title'. -->
           </a>
-        </h2>
-      {% endfor %}
+        {% endfor %}
+      </table>
     </div>
     <div class="grid-col-2">
       <div class="sidebar_section padding-top-05 padding-bottom-3">
@@ -52,6 +73,6 @@
         </div>
       </div>
     </div>
-    <div class="grid-col-1"></div>
+    <div class="grid-col-1"></div> -->
   </div>
 {% endblock %}

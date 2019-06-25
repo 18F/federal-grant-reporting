@@ -89,8 +89,32 @@ textarea {
 
 #findings_overview_table thead tr th {
   text-align: left;
+  font-weight: normal;
+}
+
+#findings_overview_table thead {
+  background-color: #F1F1F1;
 }
 
 #findings_overview_table th, #findings_overview_table td {
-  padding: 4px; /* Equivalent to USWDS Utility .padding-05 */
+  padding: 4px 40px 4px 4px; /* Equivalents to USWDS Utility .padding-05, .padding-5 */
+}
+
+/* User labels */
+
+.user_label_oval {
+  border: 1px solid;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  text-align: center;
+
+  /* Vertical centering with flexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user_label_orange {
+  border-color: #E78102;
 }

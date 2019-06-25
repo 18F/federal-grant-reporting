@@ -23,7 +23,7 @@
   </div>
   <div id="main_content_area" class="grid-row">
     <div class="grid-col-1"></div>
-    <div class="tablet:grid-col-8">
+    <div class="desktop:grid-col-8">
       <table id="findings_overview_table" class="margin-right-5">
         <thead>
           <tr>
@@ -35,21 +35,33 @@
         </thead>
         <tbody>
           <tr>
-            <td>GM</td>
-            <td>2018-15 | Commonwealth of Massachusetts</td>
-            <td>Nov 13</td>
-            <td>3</td>
+            <td>
+              <div class="user_label_oval user_label_orange">
+                GM
+              </div>
+            </td>
+            <td>
+              <div class="font-sans-md margin-bottom-05">2018-15 | Commonwealth of Massachusetts</div>
+              <div>
+                <span class="usa-tag lightblue-cool-tag">Questioned costs</span>
+                <span class="usa-tag lightblue-cool-tag">Repeat finding</span>
+              </div>
+            </td>
+            <td class="text-gray-50">
+              Nov 13
+            </td>
+            <td class="text-gray-50">3</td>
           </tr>
         </tbody>
 
-         {% for finding in findings %}
+         <!-- {% for finding in findings %}
           <a href="{{ finding.get_absolute_url }}">
             {{ finding.name }}
           </a>
-        {% endfor %}
+        {% endfor %} -->
       </table>
     </div>
-    <div class="tablet:grid-col-2">
+    <div class="desktop:grid-col-2">
       <div class="sidebar_section padding-top-05 padding-bottom-3">
         <div class="padding-y-05">My agency is:</div>
         <div class="padding-y-1">

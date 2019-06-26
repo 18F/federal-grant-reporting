@@ -73,7 +73,7 @@ Having completed that process, you will be able to access the admin interface at
 
 ### Create sample finding data
 
-Once you can access the admin interface for the project, you'll be able to create fake finding data locally.
+Once you can access the admin interface for the project (at `/admin`), you'll be able to create sample finding data locally.
 
 Start by adding and saving a new finding: http://127.0.0.1:8000/admin/resolve_findings/finding/add/.
 

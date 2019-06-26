@@ -83,11 +83,11 @@ Once your new finding record is saved, visit http://127.0.0.1:8000/finding/1/ to
 
 Here is what that page looks like as of June 2019:
 
-![screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/59533745-04f50480-8eb2-11e9-9dab-1ecdd3498b43.png)
+![screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/60221160-737c7f80-982d-11e9-9092-be88541e5141.png)
 
 ... and here is what the comments section looks like as of June 2019:
 
-![another screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/59533852-500f1780-8eb2-11e9-9665-d43b4a349131.png)
+![another screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/60221179-8b540380-982d-11e9-8bbb-38f6faeefe3c.png)
 
 ## Background
 

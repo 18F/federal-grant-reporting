@@ -71,7 +71,7 @@ You will be prompted to supply a username, email, and password.
 
 Having completed that process, you will be able to access the admin interface at `/admin` using your new superuser account.
 
-### Create fake finding data
+### Create sample finding data
 
 Once you can access the admin interface for the project, you'll be able to create fake finding data locally.
 

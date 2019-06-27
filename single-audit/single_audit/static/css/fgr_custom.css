@@ -100,6 +100,15 @@ textarea {
   padding: 4px 40px 4px 4px; /* Equivalents to USWDS Utility .padding-05, .padding-5 */
 }
 
+#findings_overview_table tr {
+  border-bottom: 1px solid #E8E4E4;
+}
+
+#findings_overview_table tr td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 /* User labels */
 
 .user_label_oval {
@@ -109,7 +118,10 @@ textarea {
   border-radius: 20px;
   text-align: center;
 
-  /* Vertical centering with flexbox */
+  /* Horizontal centering within cell */
+  margin: auto;
+
+  /* Vertical centering for inner text with flexbox */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,4 +129,8 @@ textarea {
 
 .user_label_orange {
   border-color: #E78102;
+}
+
+.user_label_purple {
+  border-color: #046B99;
 }

@@ -54,10 +54,12 @@ textarea {
 
 #overview_nav {
   background-color: #E8EEF5;
+  width: 100%;
 }
 
 #overview_nav .overview_nav_button {
   background-color: #E8EEF5;
+  border-top: 8px solid #E8EEF5;
 
   /* Vertical centering for tab text with flexbox */
   display: flex;
@@ -109,7 +111,7 @@ textarea {
     padding: 8px;
   }
 
-  #overview_nav, #findings_overview_table {
+  #findings_overview_table {
     margin: 0 8px;
   }
 }

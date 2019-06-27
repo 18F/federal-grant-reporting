@@ -20,11 +20,9 @@
     <div class="grid-col-1"></div>
     <div class="grid-col-7">
       <div class="margin-bottom-4">
-        {% block title %}
-          <div id="finding_title" class="margin-bottom-1 padding-205 text-italic text-white">
-            {{ finding.name }}
-          </div>
-        {% endblock %}
+        <div id="finding_title" class="margin-bottom-1 padding-205 text-italic text-white">
+          {% block title %}{{ finding.name }}{% endblock %}
+        </div>
         <div class="margin-bottom-1">MDL Due: <span class="text-bold">05/13/19</span></div>
         <div class="margin-bottom-1">Type of Finding: <span class="text-bold">{{ finding.finding_type }}</span></div>
         <div class="margin-bottom-1">Prior Year Findings: <span class="text-bold"><a href="">2017-012</a></span></div>

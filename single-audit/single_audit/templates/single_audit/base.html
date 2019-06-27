@@ -11,7 +11,12 @@
         href="{% static 'uswds/img/favicons/favicon.ico' %}" />
   {% block custom_css %}
   {% endblock %}
-  <title></title>
+
+  <title>
+  {% block title %}
+  {% endblock %}
+  </title>
+
   {% block viewport_meta %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% endblock %}

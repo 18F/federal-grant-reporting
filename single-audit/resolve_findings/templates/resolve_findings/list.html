@@ -5,7 +5,7 @@
 
 {% block content %}
   {% include 'single_audit/logged_in_user.html' %}
-  <div id="overview_nav" class="grid-row height-10 margin-y-5">
+  <div id="overview_nav" class="grid-row height-10 margin-top-5">
     <div class="grid-col-1"></div>
     <div class="overview_nav_button mobile-lg:grid-col-2 text-center selected">
       Assigned to me
@@ -20,7 +20,7 @@
   </div>
   <div id="main_content_area" class="grid-row">
     <div class="grid-col-1"></div>
-    <div class="desktop:grid-col-8">
+    <div class="desktop:grid-col-8 margin-top-5">
       <table id="findings_overview_table" class="margin-right-5">
         <thead>
           <tr>
@@ -86,7 +86,7 @@
         </tbody>
       </table>
     </div>
-    <div class="desktop:grid-col-2">
+    <div class="desktop:grid-col-2 margin-top-5 margin-x-1">
       <div class="sidebar_section padding-top-05 padding-bottom-3">
         <div class="padding-y-05">My agency is:</div>
         <div class="padding-y-1">

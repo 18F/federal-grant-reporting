@@ -31,6 +31,13 @@
           </tr>
         </thead>
         <tbody>
+         <!-- NOTE: table body data will populate like this:
+
+         {% for finding in findings %}
+          <a href="{{ finding.get_absolute_url }}">
+            {{ finding.name }}
+          </a>
+        {% endfor %} -->
           <tr>
             <td>
               <div class="user_label_oval user_label_orange">
@@ -77,12 +84,6 @@
             </td>
           </tr>
         </tbody>
-
-         <!-- {% for finding in findings %}
-          <a href="{{ finding.get_absolute_url }}">
-            {{ finding.name }}
-          </a>
-        {% endfor %} -->
       </table>
     </div>
     <div class="desktop:grid-col-2">

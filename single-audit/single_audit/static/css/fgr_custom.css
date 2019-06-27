@@ -97,7 +97,7 @@ textarea {
 }
 
 #findings_overview_table th, #findings_overview_table td {
-  padding: 4px 40px 4px 4px; /* Equivalents to USWDS Utility .padding-05, .padding-5 */
+  padding: 4px 16px;  /* Equivalents to USWDS Utility .padding-05, .padding-2 */
 }
 
 #findings_overview_table tr {
@@ -133,4 +133,10 @@ textarea {
 
 .user_label_purple {
   border-color: #046B99;
+}
+
+.new_activity_badge {
+  background-color: #FDB81E; /* gold */
+  text-align: center;
+  font-weight: bold;
 }

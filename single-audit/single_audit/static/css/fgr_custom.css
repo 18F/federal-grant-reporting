@@ -108,7 +108,7 @@ textarea {
 
 @media screen and (max-width: 480px) /*mobile-lg*/ {
   #findings_overview_table th, #findings_overview_table td {
-    padding: 8px;
+    padding: 8px 4px;
   }
 
   #findings_overview_table {

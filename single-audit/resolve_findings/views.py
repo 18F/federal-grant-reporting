@@ -22,6 +22,13 @@ def finding_resolution_page(request, finding_id):
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.finding = finding
+
+            # When the app incorporates authentication, we will know the identity
+            # of each logged-in user when they add a comment.
+            #
+            # For now, set this to "1" to avoid a database constraint error.
+            new_comment.author_id = 1
+
             new_comment.save()
     else:
         comment_form = CommentForm()

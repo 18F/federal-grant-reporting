@@ -71,6 +71,24 @@ You will be prompted to supply a username, email, and password.
 
 Having completed that process, you will be able to access the admin interface at `/admin` using your new superuser account.
 
+### Create sample finding data
+
+Once you can access the admin interface for the project (at `/admin`), you'll be able to create sample finding data locally.
+
+Start by adding and saving a new finding: http://127.0.0.1:8000/admin/resolve_findings/finding/add/.
+
+### See the project locally
+
+Once your new finding record is saved, visit http://127.0.0.1:8000/finding/1/ to see the Finding Resolution Page.
+
+Here is what that page looks like as of June 2019:
+
+![screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/60221160-737c7f80-982d-11e9-9092-be88541e5141.png)
+
+... and here is what the comments section looks like as of June 2019:
+
+![another screenshot of Finding Resolution page](https://user-images.githubusercontent.com/3209501/60221179-8b540380-982d-11e9-8bbb-38f6faeefe3c.png)
+
 ## Background
 
 The Federal Grant Reporting (FGR) Project is sponsored by the GSA [Technology Transformation Service](https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services)'s [10x team](https://10x.gsa.gov). 10x helps turn ideas from federal employees into real projects that improve the experience people have with our government through technology. [The 10x process](https://10x.gsa.gov/the-10x-process/) incubates these ideas through a series of stages: Investigation, Discovery, Development, and Scale. The FGR project has reached the third stage.

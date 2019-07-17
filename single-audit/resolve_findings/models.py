@@ -103,5 +103,8 @@ class Finding(models.Model):
     class Meta:
         ordering = ('-status',)
 
+    def get_absolute_url(self):
+        return "/finding/%i/" % self.id
+
     def __str__(self):
         return self.name

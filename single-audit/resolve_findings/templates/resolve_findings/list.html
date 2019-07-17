@@ -33,13 +33,43 @@
           </tr>
         </thead>
         <tbody>
-         <!-- NOTE: table body data will populate like this:
+          {% for finding in findings %}
+            <tr>
+              <td>
+                <div class="user_label_oval user_label_orange">
+                  GM
+                </div>
+              </td>
+              <td>
+                <a href="{{ finding.get_absolute_url }}">
+                  <div class="font-sans-md margin-bottom-05">
+                    {{ finding.number }} | {{ finding.grantee.name }}
+                  </div>
+                  <div>
+                    <span class="usa-tag lightblue-cool-tag">
+                      Questioned costs
+                    </span>
+                    <span class="usa-tag lightblue-cool-tag">
+                      Repeat finding
+                    </span>
+                  </div>
+                </a>
+              </td>
+              <td class="text-gray-50">
+                Nov 13
+              </td>
+              <td class="text-gray-50 text-center">
+                3
+                <img alt="comment icon"
+                  src="{% static 'img/comment-alt-gray.svg' %}"
+                  height="14"
+                  class="margin-left-05"
+                  style="position: relative; top: 2px;" />
+              </td>
+            </tr>
+          {% endfor %}
 
-         {% for finding in findings %}
-          <a href="{{ finding.get_absolute_url }}">
-            {{ finding.name }}
-          </a>
-        {% endfor %} -->
+          <!-- hardcoded examples follow, for the sake of demonstration. -->
           <tr>
             <td>
               <div class="user_label_oval user_label_orange">

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 
@@ -108,3 +109,26 @@ class Finding(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    finding = models.ForeignKey(
+        Finding,
+        related_name='comments',
+        on_delete=models.CASCADE
+    )
+    author = models.ForeignKey(
+        get_user_model(),
+        related_name='comments',
+        on_delete=models.CASCADE
+    )
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.author, self.finding)

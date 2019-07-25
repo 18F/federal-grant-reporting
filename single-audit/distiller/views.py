@@ -1,4 +1,5 @@
 import os
+import time  # for use with selenium; may or may not need it.
 from io import StringIO
 
 from django.conf import settings
@@ -6,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 import pandas as pd
-import mechanicalsoup
+from selenium import webdriver
 
 from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_valid_agency_prefix
 
@@ -25,16 +26,28 @@ current_fiscal_year = '2018'  # @todo: Encapsulate this in a proper function.
 
 
 def download_pdfs_from_fac(agency_prefix='20'):
-    # @todo: Put this in a function and call it from somewhere, no? Just update the
-    #        function named in urls.py. (Then you can refactor to use a template.)
-    browser = mechanicalsoup.StatefulBrowser()
+    # @todo: Refactor urls.py, etc. to call this via the appropriate template.
+
+#    chrome_options.add_argument("--headless")
+
+    # @todo: Look into Chrome Driver service for cloud.gov itself.
+    chrome_driver_location = os.path.join(settings.BASE_DIR, 'distiller', 'chromedriver')
+    driver = webdriver.Chrome(chrome_driver_location)  # Optional argument, if not specified will search path.
+    driver.get('http://www.google.com/xhtml')
+    time.sleep(5)  # Let the user actually see something!
+    search_box = driver.find_element_by_name('q')
+    search_box.send_keys('ChromeDriver')
+    search_box.submit()
+    time.sleep(5)  # Let the user actually see something!
+    driver.quit()
+
     # 1. Go to https://harvester.census.gov/facdissem/SearchA133.aspx
-    browser.open(fac_url)
+#    driver.get(fac_url)
     # browser.get_current_page().find_all('legend')  # ...nah.
-    browser.select_form('form[action="./SearchA133.aspx"]')  # @todo: Check whether that period is necessary. It's in the source code, but.
+#    browser.select_form('form[action="./SearchA133.aspx"]')  # @todo: Check whether that period is necessary. It's in the source code, but.
 
     # Just for actively working on this: gets the form field options.
-    browser.get_current_form().print_summary()
+#    browser.get_current_form().print_summary()
 
     # [SEEMS UNNECESSARY] 2. Click the “General Information” accordion, if you must. (May be unnecessary.)
     # 3. Select “2018” checkbox under “Fiscal Year (Required)”.
@@ -42,32 +55,32 @@ def download_pdfs_from_fac(agency_prefix='20'):
     # For radio buttons, well, it’s simple too: radio buttons have several input tag with the same name and different values, just select the one you need ("size" is the name attribute, "medium" is the "value" attribute of the element we want to tick):
     # browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1'] = current_fiscal_year
 #      Can't assign. Figure out what that's about.
-    browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1'] = '2018'
+#    browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1'] = '2018'
 
     # 3b. ...and deselect the "All Years" checkbox.
-    browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$0'] = '0'
+#    browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$0'] = '0'
 
     # (@todo: Come to think of it, check: do they want to filter by fiscal year? Or do
-    # they just want everything that's come in recently, fiscal year be damned?
+    # they just want everything that's come in recently, regardless of fiscal year?
     # Probably the latter...)
 
     # 4. TO CUT DOWN ON OVERLOAD: Try entering [7 days ago] and today into the “FAC Release Date” fields (“From” and “To,” respectively).
     #     ex: 07/16/2019, 07/23/2019. Must be MM/DD/YYYY.
     # @todo: circle back and update this to actually calculate the "From" date.
-    browser['ctl00$MainContent$UcSearchFilters$DateProcessedControl$FromDate'] = '07/16/2019'
-    browser['ctl00$MainContent$UcSearchFilters$DateProcessedControl$ToDate'] = '07/23/2019'
+#    browser['ctl00$MainContent$UcSearchFilters$DateProcessedControl$FromDate'] = '07/16/2019'
+#    browser['ctl00$MainContent$UcSearchFilters$DateProcessedControl$ToDate'] = '07/23/2019'
 
     # [SEEMS UNNECESSARY] 5. Click the ‘Federal Awards’ accordion, if you must. (Ditto.)
     # 6. Under “Federal Agencies with Current or Prior Year Audit Findings on Direct Awards”, select [as described above. In the case of DOT, we’ll start with ’20’.]
-    browser['ctl00$MainContent$UcSearchFilters$FedAgency$CheckableItems$22'] = '20'
+#    browser['ctl00$MainContent$UcSearchFilters$FedAgency$CheckableItems$22'] = '20'
     # browser['ctl00$MainContent$UcSearchFilters$FedAgency$CheckableItems$22'] = agency_prefix
     #       I agree, it's strange that this is "CheckableItems22" when the value is 20. Not a typo though. (And 22 is probably pure order.)
 
     # First, let's check our work. (Just during development. @todo: Remove when done, or leave commented-out with documented notes for future troubleshooting.)
-    browser.get_current_form().print_summary()  # or, sure, you can try browser.launch_browser().
+#    browser.get_current_form().print_summary()  # or, sure, you can try browser.launch_browser().
 
     # 7. Click the ‘Search’ button.
-    response = browser.submit_selected(btnName='ctl00$MainContent$UcSearchFilters$btnSearch_bottom')  # @todo: Modify this to submit the
+#    response = browser.submit_selected(btnName='ctl00$MainContent$UcSearchFilters$btnSearch_bottom')  # @todo: Modify this to submit the
     #                                       #        SPECIFIC select button.
     #
     # name="ctl00$MainContent$UcSearchFilters$btnSearch_bottom" value="Search"
@@ -76,10 +89,10 @@ def download_pdfs_from_fac(agency_prefix='20'):
     # after all.)
 
     # For temporary debugging:
-    html = response.text
-    print(html)
+#    html = response.text
+#    print(html)
     # @todo: finish, and move this to the end. But just for now:
-    return HttpResponse(html)
+#    return HttpResponse(html)
 
     # 8. A new page loads. Click the ‘I acknowledge that I have read and understand the above statements’ checkbox.
     # 9. Click the ‘Continue to Search Results’ button.#
@@ -94,6 +107,10 @@ def download_pdfs_from_fac(agency_prefix='20'):
 
     # @todo: Update this method to return something appropriate.
     # @todo: Document it too.
+    driver.close()
+
+    # @todo: Return a more appropriate HttpResponse.
+    return HttpResponse("Done for now.", content_type="text/plain")
 
 
 def prompt_for_agency_name(request):
@@ -219,6 +236,6 @@ def extract_findings_from_pdf():
     # @todo: Rework this to be more dynamic. For now, start with parsing just
     # one PDF and expand from there.
 
-
+    findings = True
 
     return findings

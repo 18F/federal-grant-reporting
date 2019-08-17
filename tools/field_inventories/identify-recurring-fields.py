@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # Originally created for https://github.com/18F/federal-grant-reporting/issues/63.
 

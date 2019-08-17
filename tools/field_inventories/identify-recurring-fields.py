@@ -23,7 +23,7 @@ def get_filenames_of_field_inventories(directory=files_directory):
 
 
 def get_form_name_from_filename(filename):
-    if filename[-4:] == ".csv":
+    if filename.endswith('.csv'):
         return filename[:-4]
     else:
         return filename

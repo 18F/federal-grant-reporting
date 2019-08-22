@@ -17,7 +17,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).parents[2]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.cloud.gov',
+]
 
 SECRET_KEY = 'SECRET'
 

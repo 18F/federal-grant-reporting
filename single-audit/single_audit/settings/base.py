@@ -110,5 +110,4 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-
-AUTH_USER_MODEL = 'resolve_findings.User'
+# Removed DATABASES because this project's current approach doesn't need them.

@@ -31,9 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'localflavor',
-    'fac.apps.FacConfig',
     'distiller.apps.DistillerConfig',
-    'resolve_findings.apps.ResolveFindingsConfig',
 ]
 
 MIDDLEWARE = [

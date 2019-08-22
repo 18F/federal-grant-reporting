@@ -8,6 +8,7 @@ from django.shortcuts import render
 
 import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 
 from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_valid_agency_prefix
 
@@ -15,50 +16,108 @@ from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_vali
 #        https://harvester.census.gov/facdissem/PublicDataDownloads.aspx
 #        Do it on some cached ongoing basis so you're not making people wait for
 #        a 500-MB download.
-directory_name = 'single_audit_data_dump'
-files_directory = os.path.join(settings.BASE_DIR, 'distiller', directory_name)
+DIRECTORY_NAME = 'single_audit_data_dump'
+FILES_DIRECTORY = os.path.join(settings.BASE_DIR, 'distiller', DIRECTORY_NAME)
+
+CHROME_DRIVER_LOCATION = os.path.join(settings.BASE_DIR, 'distiller', 'chromedriver')
+
+# Received from FTA on July 29, 2019 for testing.
+# @todo at some point: figure out how to automatically update them. But at
+#                      minimum/as an interim measure, the user can enter them
+#                      manually.
+#
+# @todo: Check whether searching for "20.5*" pulls up the same list. Dante
+#        confirmed that 20.5 is FTA.
+#
+# @todo at some point: See where you might be able to find a lookup of subagencies.
+#                      You already have the initial agency prefixes.
+CFDA_NUMBERS = (
+    20.500,
+    20.505,
+    20.507,
+    20.509,
+    20.513,
+    20.514,
+    20.516,
+    20.518,
+    20.519,
+    20.520,
+    20.521,
+    20.522,
+    20.523,
+    20.524,
+    20.525,
+    20.526,
+    20.527,
+    20.528,
+    20.529,
+    20.530,
+    20.531,
+    )
 
 # @todo: Improve the naming here and make it more possible for it to be
 #        extendable to different kinds of URLs.
-fac_url = 'https://harvester.census.gov/facdissem/SearchA133.aspx'
+FAC_URL = 'https://harvester.census.gov/facdissem/SearchA133.aspx'
 
 current_fiscal_year = '2018'  # @todo: Encapsulate this in a proper function.
 
 
-def download_pdfs_from_fac(agency_prefix='20'):
+# @todo: revisit the question of what an appropriate default would be.
+def _calculate_start_date(time_difference=90):
+    # @todo: rework this to use end_date.
+    start_date = date.today() - timedelta(time_difference)
+    return _format_date_for_fac_fields(start_date)
+
+
+# Return the appropriately formatted version of 'today'. Format is drawn from
+# the FAC's current requirements as of July 2019.
+def _calculate_end_date():
+#    return date.today().strftime("%m/%d/%Y")
+    end_date = date.today()  # This could change, but it's desired for now.
+    return _format_date_for_fac_fields(end_date)
+
+
+def _format_date_for_fac_fields(date):
+    return date.strftime("%m/%d/%Y")
+
+
+def download_pdfs_from_fac(agency_prefix='20', subagency_extension='5'):
     # @todo: Refactor urls.py, etc. to call this via the appropriate template.
 
-#    chrome_options.add_argument("--headless")
+    # Setting subagency_extension default to DOT FTA for testing and demo purposes.
+    # @todo: Revisit this once you have an actual CFDA-to-subagency lookup table.
 
-    # @todo: Look into Chrome Driver service for cloud.gov itself.
-    chrome_driver_location = os.path.join(settings.BASE_DIR, 'distiller', 'chromedriver')
-    driver = webdriver.Chrome(chrome_driver_location)  # Optional argument, if not specified will search path.
-    driver.get('http://www.google.com/xhtml')
-    time.sleep(5)  # Let the user actually see something!
-    search_box = driver.find_element_by_name('q')
-    search_box.send_keys('ChromeDriver')
-    search_box.submit()
-    time.sleep(5)  # Let the user actually see something!
-    driver.quit()
+    # @todo: LOOK INTO CHROME DRIVER SERVICE and how you'd use that on cloud.govself.
+
+    driver = webdriver.Chrome(CHROME_DRIVER_LOCATION)  # Optional argument, if not specified will search path.
 
     # 1. Go to https://harvester.census.gov/facdissem/SearchA133.aspx
-#    driver.get(fac_url)
-    # browser.get_current_page().find_all('legend')  # ...nah.
-#    browser.select_form('form[action="./SearchA133.aspx"]')  # @todo: Check whether that period is necessary. It's in the source code, but.
+    driver.get(FAC_URL)
+    time.sleep(5)  # ...just in case.
 
     # Just for actively working on this: gets the form field options.
 #    browser.get_current_form().print_summary()
 
     # [SEEMS UNNECESSARY] 2. Click the “General Information” accordion, if you must. (May be unnecessary.)
     # 3. Select “2018” checkbox under “Fiscal Year (Required)”.
-
-    # For radio buttons, well, it’s simple too: radio buttons have several input tag with the same name and different values, just select the one you need ("size" is the name attribute, "medium" is the "value" attribute of the element we want to tick):
-    # browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1'] = current_fiscal_year
-#      Can't assign. Figure out what that's about.
-#    browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1'] = '2018'
+    #       name = ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1
+    #       id = ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1
+#    driver.find_element_by_name('ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1').click()
+    checkbox_for_fy2018 = driver.find_element_by_name('ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1')
+    print(checkbox_for_fy2018.get_property('name'))
+    checkbox_for_fy2018.click()
+    # @todo: Find out whether there's a performance or other reason to prefer
+    # 'name' over 'id' or vice versa.
 
     # 3b. ...and deselect the "All Years" checkbox.
 #    browser['ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$0'] = '0'
+
+    #driver.find_element_by_name('ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1').click()
+#    all_years = Select(driver.find_element_by_name('ctl00$MainContent$UcSearchFilters$FYear$CheckableItems$1'))
+#    all_years.deselect_all()
+
+    #  select = Select(driver.find_element_by_id('id'))
+    #  select.deselect_all()
 
     # (@todo: Come to think of it, check: do they want to filter by fiscal year? Or do
     # they just want everything that's come in recently, regardless of fiscal year?
@@ -84,9 +143,11 @@ def download_pdfs_from_fac(agency_prefix='20'):
     #                                       #        SPECIFIC select button.
     #
     # name="ctl00$MainContent$UcSearchFilters$btnSearch_bottom" value="Search"
-
-    # (It does indeed have an onClick, so... maybe you'll need to switch to Selenium
-    # after all.)
+    # id="MainContent_UcSearchFilters_btnSearch_bottom"
+    # @todo: Doublecheck whether you have to save an element before you can
+    #        interact with it. Seems like you do.
+    search_button = driver.find_element_by_id('MainContent_UcSearchFilters_btnSearch_bottom')
+    search_button.click()
 
     # For temporary debugging:
 #    html = response.text
@@ -101,13 +162,17 @@ def download_pdfs_from_fac(agency_prefix='20'):
 
     # 10. [@todo: Determine whether or not you need to use the “Selected Audit Reports” dropdown — specifically, how to handle having more than one page of results and how best to “select” those for download.]#
 
-    # 11. Click the ‘Download Audits’ button.#
+        # @todo: Add error handling, for the very likely circumstance in which
+        # more results are returned than can be handled.
+        # assert "No results found." not in driver.page_source # <-- This isn't the right text to use, but it's an example.
+
+    # 11. Click the ‘Download Audits’ button.
 
     # 12. Hit ‘Save’! You’ve got your download, a ZIP file of PDFs. :) And... a cross-reference filename spreadsheet. :shrug:
 
     # @todo: Update this method to return something appropriate.
     # @todo: Document it too.
-    driver.close()
+    driver.quit()
 
     # @todo: Return a more appropriate HttpResponse.
     return HttpResponse("Done for now.", content_type="text/plain")

@@ -1,6 +1,9 @@
 # Federal Grant Reporting Project
 Improving the experience of federal grant reporting.
 
+The 10x Federal Grantee Reporting project is building a prospective shared solution for the single audit finding resolution process, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike. The prototype also provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
+
+
 # Single audit resolution
 Enabling simpler, faster, easier, better resolution of single audit findings by
 agencies and grantees alike.

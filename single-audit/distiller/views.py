@@ -18,6 +18,7 @@ from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_vali
 #        a 500-MB download.
 DIRECTORY_NAME = 'single_audit_data_dump'
 FILES_DIRECTORY = os.path.join(settings.BASE_DIR, 'distiller', DIRECTORY_NAME)
+DEPT_OF_TRANSPORTATION_PREFIX = '20'
 
 CHROME_DRIVER_LOCATION = os.path.join(settings.BASE_DIR, 'distiller', 'chromedriver')
 
@@ -62,30 +63,30 @@ FAC_URL = 'https://harvester.census.gov/facdissem/SearchA133.aspx'
 current_fiscal_year = '2018'  # @todo: Encapsulate this in a proper function.
 
 
-# @todo: revisit the question of what an appropriate default would be.
-def _calculate_start_date(time_difference=90):
-    # @todo: rework this to use end_date.
-    start_date = date.today() - timedelta(time_difference)
-    return _format_date_for_fac_fields(start_date)
-
-
-# Return the appropriately formatted version of 'today'. Format is drawn from
-# the FAC's current requirements as of July 2019.
-def _calculate_end_date():
-#    return date.today().strftime("%m/%d/%Y")
-    end_date = date.today()  # This could change, but it's desired for now.
-    return _format_date_for_fac_fields(end_date)
-
-
-def _format_date_for_fac_fields(date):
-    return date.strftime("%m/%d/%Y")
-
-
-def download_pdfs_from_fac(agency_prefix='20', subagency_extension='5'):
+def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX):
     # @todo: Refactor urls.py, etc. to call this via the appropriate template.
 
+<<<<<<< HEAD
     # Setting subagency_extension default to DOT FTA for testing and demo purposes.
     # @todo: Revisit this once you have an actual CFDA-to-subagency lookup table.
+=======
+    # From https://realpython.com/modern-web-automation-with-python-and-selenium/:
+    # from selenium.webdriver import Firefox
+    # from selenium.webdriver.firefox.options import Options
+    # opts = Options()
+    # opts.set_headless()
+    # assert opts.headless  # Operating in headless mode
+    # browser = Firefox(options=opts)
+
+    # From https://duo.com/decipher/driving-headless-chrome-with-python:
+#    from selenium.webdriver.common.keys import Keys
+#    from selenium.webdriver.chrome.options import Options
+
+#    chrome_options = Options()
+#    chrome_options.add_argument("--headless")
+#   # @todo: Update for deployed location, presumably.
+#   # @todo: Check whether you can just pull some of what you used for functional testing already.
+>>>>>>> 3d4fa50... Replace magic number with a named constant
 
     # @todo: LOOK INTO CHROME DRIVER SERVICE and how you'd use that on cloud.govself.
 
@@ -259,7 +260,7 @@ def generate_csv_download(dataframe, results_filename='agency-specific-results.c
     return response
 
 
-def offer_download_of_agency_specific_csv(request, agency_prefix='20'):
+def offer_download_of_agency_specific_csv(request, agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX):
     agency_df = filter_general_table_by_agency(agency_prefix)
 
     response = generate_csv_download(agency_df)

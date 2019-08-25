@@ -31,8 +31,6 @@ FTA_SUBAGENCY_CODE = '5'
 #        extendable to different kinds of URLs.
 FAC_URL = 'https://harvester.census.gov/facdissem/SearchA133.aspx'
 
-current_fiscal_year = '2018'  # @todo: Encapsulate this in a proper function.
-
 
 def _calculate_start_date(time_difference=90, end_date=date.today()):
     """

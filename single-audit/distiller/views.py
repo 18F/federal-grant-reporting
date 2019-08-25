@@ -191,8 +191,8 @@ def prompt_for_agency_name(request):
 
 
 def __get_findings(agency_df):
-    '''
-    Takes:
+    """
+    Args:
         A dataframe of agency data, currently derived from genXX.txt.
 
     Returns:
@@ -201,7 +201,7 @@ def __get_findings(agency_df):
     Room for improvement:
         Modify this function to retrieve the cross-referenced findings instead
         of just 'Y/N'.
-    '''
+    """
 
     try:
         findings_df = agency_df.loc[agency_df['CYFINDINGS'] == 'Y']
@@ -213,13 +213,13 @@ def __get_findings(agency_df):
 
 
 def __get_number_of_findings(agency_df):
-    '''
-    Takes:
-        A dataframe of agency data, currently derived from genXX.txt.
+    """
+    Args:
+        agency_df: A dataframe of agency data, currently derived from genXX.txt.
 
     Returns:
         An integer, or 'None'.
-    '''
+    """
 
     try:
         findings_df = __get_findings(agency_df)

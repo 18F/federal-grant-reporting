@@ -11,6 +11,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 
 from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_valid_agency_prefix
 
@@ -64,8 +65,47 @@ def _format_date_for_fac_fields(date):
     return date.strftime("%m/%d/%Y")
 
 
+def check_for_chromedriver():
+    """
+    Try to open Chromedriver at the specified location. If you can't, throw an
+    exception.
+    """
+
+    try:
+        chromedriver = open(CHROME_DRIVER_LOCATION)
+        chromedriver.close()
+    except IOError:
+        # @todo: Make this error message more informative without potentially
+        #        exposing sensitive system information.
+        #
+        #        Download link to provide:
+        #        https://sites.google.com/a/chromium.org/chromedriver/downloads
+        print("Chromedriver could not be opened.")
+
+
+def list_completed_chrome_downloads(driver):
+    """
+    List the Chrome downloads that have completed.
+
+    Credit where credit's due: https://stackoverflow.com/a/48267887/902981
+
+    Args:
+        driver (webdriver): a Selenium webdriver.
+
+    Returns:
+        A list of paths of downloaded files.
+    """
+
+    if not driver.current_url.startswith("chrome://downloads"):
+        driver.get("chrome://downloads/")
+    return driver.execute_script("""
+        var items = downloads.Manager.get().items_;
+        if (items.every(e => e.state === "COMPLETE"))
+            return items.map(e => e.fileUrl || e.file_url);
+        """)
+
+
 # Setting subagency_extension default to DOT FTA for testing and demo purposes.
-# @todo: Revisit this once you have an actual CFDA-to-subagency lookup table.
 def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
                            subagency_extension=FTA_SUBAGENCY_CODE):
     """
@@ -89,6 +129,8 @@ def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     Returns:
         A (date) string formatted for the Federal Audit Clearinghouse (MM/DD/YYYY).
     """
+
+    check_for_chromedriver()
 
     driver = webdriver.Chrome(CHROME_DRIVER_LOCATION)  # Optional argument, if not specified will search path.
 
@@ -160,14 +202,19 @@ def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     # 10. Click the ‘Download Audits’ button.
     driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()
     # Apparently there's no need to then hit the ‘Save’ button. You’ve got your
-    # download, a ZIP file of PDFs. :) And... a cross-reference filename
-    # spreadsheet. :shrug:
+    # download, a ZIP file of 1) PDFs and 2) a cross-reference spreadsheet of
+    # filenames.
     #
     # @todo: Consider elaborating on this such that you unzip the ZIP file and
     #        rename the filenames to match something clearer, like the grantee
     #        name and the fiscal year of the report.
 
-    driver.quit()
+    # Wait for download(s) to complete, then gets their paths.
+    paths = WebDriverWait(driver, 500, 1).until(list_completed_chrome_downloads)
+
+    if paths:
+        driver.quit()
+
     # @todo: Improve the contents of this HttpResponse.
     return HttpResponse("Your download has completed.", content_type="text/plain")
 

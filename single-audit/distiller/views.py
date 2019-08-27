@@ -106,7 +106,6 @@ def list_completed_chrome_downloads(driver):
 
 
 # Setting subagency_extension default to DOT FTA for testing and demo purposes.
-# @todo: Revisit this once you have an actual CFDA-to-subagency lookup table.
 def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
                            subagency_extension=FTA_SUBAGENCY_CODE):
     """
@@ -203,8 +202,8 @@ def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     # 10. Click the ‘Download Audits’ button.
     driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()
     # Apparently there's no need to then hit the ‘Save’ button. You’ve got your
-    # download, a ZIP file of PDFs. :) And... a cross-reference filename
-    # spreadsheet. :shrug:
+    # download, a ZIP file of 1) PDFs and 2) a cross-reference spreadsheet of
+    # filenames.
     #
     # @todo: Consider elaborating on this such that you unzip the ZIP file and
     #        rename the filenames to match something clearer, like the grantee

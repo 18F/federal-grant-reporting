@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('fac', get_single_audit_package),
     path('', distiller_views.prompt_for_agency_name),
-    path('get-single-audits-by-agency/', distiller_views.show_agency_level_summary, name='Show relevant single audits'),
-    path('generate-a-csv/', distiller_views.offer_download_of_agency_specific_csv, name='Prompt to save a CSV'),
+    path('get-single-audits-by-agency/', distiller_views.show_agency_level_summary, name='show_relevant_audits'),
+    path('generate-a-csv/', distiller_views.offer_download_of_agency_specific_csv, name='prompt_to_save_csv'),
+    path('download-single-audits/', distiller_views.download_pdfs_from_fac, name='download_single_audit_pdfs'),
     path('findings/', findings_views.findings_list, name='findings_overview'),
     path('finding/<int:finding_id>/', findings_views.finding_resolution_page, name='finding'),
 ]

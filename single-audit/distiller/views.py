@@ -11,6 +11,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 
 from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_valid_agency_prefix
 
@@ -62,6 +63,28 @@ def _format_date_for_fac_fields(date):
     """
 
     return date.strftime("%m/%d/%Y")
+
+
+def list_completed_chrome_downloads(driver):
+    """
+    List the Chrome downloads that have completed.
+
+    Credit where credit's due: https://stackoverflow.com/a/48267887/902981
+
+    Args:
+        driver (webdriver): a Selenium webdriver.
+
+    Returns:
+        A list of paths of downloaded files.
+    """
+
+    if not driver.current_url.startswith("chrome://downloads"):
+        driver.get("chrome://downloads/")
+    return driver.execute_script("""
+        var items = downloads.Manager.get().items_;
+        if (items.every(e => e.state === "COMPLETE"))
+            return items.map(e => e.fileUrl || e.file_url);
+        """)
 
 
 # Setting subagency_extension default to DOT FTA for testing and demo purposes.
@@ -167,7 +190,12 @@ def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     #        rename the filenames to match something clearer, like the grantee
     #        name and the fiscal year of the report.
 
-    driver.quit()
+    # Wait for download(s) to complete, then gets their paths.
+    paths = WebDriverWait(driver, 500, 1).until(list_completed_chrome_downloads)
+
+    if paths:
+        driver.quit()
+
     # @todo: Improve the contents of this HttpResponse.
     return HttpResponse("Your download has completed.", content_type="text/plain")
 

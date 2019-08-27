@@ -65,6 +65,24 @@ def _format_date_for_fac_fields(date):
     return date.strftime("%m/%d/%Y")
 
 
+def check_for_chromedriver():
+    """
+    Try to open Chromedriver at the specified location. If you can't, throw an
+    exception.
+    """
+
+    try:
+        chromedriver = open(CHROME_DRIVER_LOCATION)
+        chromedriver.close()
+    except IOError:
+        # @todo: Make this error message more informative without potentially
+        #        exposing sensitive system information.
+        #
+        #        Download link to provide:
+        #        https://sites.google.com/a/chromium.org/chromedriver/downloads
+        print("Chromedriver could not be opened.")
+
+
 def list_completed_chrome_downloads(driver):
     """
     List the Chrome downloads that have completed.
@@ -112,6 +130,8 @@ def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     Returns:
         A (date) string formatted for the Federal Audit Clearinghouse (MM/DD/YYYY).
     """
+
+    check_for_chromedriver()
 
     driver = webdriver.Chrome(CHROME_DRIVER_LOCATION)  # Optional argument, if not specified will search path.
 

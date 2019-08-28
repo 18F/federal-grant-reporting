@@ -166,9 +166,8 @@ def download_sf_sac_forms(driver):
 
 
 # Setting subagency_extension default to DOT FTA for testing and demo purposes.
-# @todo: Rename this 'download_files_from_fac' and update index.html accordingly.
-def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
-                           subagency_extension=FTA_SUBAGENCY_CODE):
+def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
+                            subagency_extension=FTA_SUBAGENCY_CODE):
     """
     Search the Federal Audit Clearinghouse for relevant single audits, then
     download the results.

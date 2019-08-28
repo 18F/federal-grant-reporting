@@ -105,7 +105,68 @@ def list_completed_chrome_downloads(driver):
         """)
 
 
+def download_sf_sac_forms(driver):
+    """
+    Initiate downloads of all SF-SAC forms linked from a results page on the
+    Federal Audit Clearinghouse.
+
+    Args:
+        driver (webdriver): a Selenium webdriver.
+
+    Returns:
+        True if successful, False otherwise
+
+    Room for improvement:
+        Safeguard against the possibilities that you aren't on the correct page,
+        don't have any results, etc.
+
+        (URL should be https://harvester.census.gov/facdissem/SearchResults.aspx)
+    """
+
+    # If you have to select something else first, try either the DIV with ID
+    # "MainContent_ucA133SearchResults_UpdatePanel"
+    # or the table with ID "MainContent_ucA133SearchResults_ResultsGrid".
+    #
+    # (The div contains the table contains the cells that contain these links.)
+
+    # @todo: Ideally, count the results and iterate through them (so you can be
+    #        guaranteed a reasonable amount of accuracy and flexibility), but
+    #        I'm going to start by brute-forcing it: check whether the link
+    #        exists, and if it does, click it.
+
+    # ex: 'a' element with ID "MainContent_ucA133SearchResults_ResultsGrid_lnkbuttonForm_0"
+    #
+    # @todo: Consider refactoring the (single audit) PDF download such that it
+    #        happens in tandem with this. 'Cause there's a corresponding audit
+    #        link (MainContent_ucA133SearchResults_ResultsGrid_lnkbuttonAudit_0)
+    #        for each form (MainContent_ucA133SearchResults_ResultsGrid_lnkbuttonForm_0)
+    #
+    #        ...and then you could have greater parallelism and be able to give
+    #        better insight into how far along the downloads are.
+    #
+    #        (Would you still get the grantee names in a lookup file, though?
+    #        Probably not, in which case you'd want to assign the files a
+    #        different filename based on the contents of this search-results-
+    #        page table... could get awkward, but it's something to consider.)
+
+    max_number_of_search_results = 25  # numbered 0 through 24. As mentioned above, it'd be good to make this more flexible.
+    for i in range(max_number_of_search_results):
+        # Try to locate the relevant SF-SAC form download link.
+        link_name = 'MainContent_ucA133SearchResults_ResultsGrid_lnkbuttonForm_' + str(i)
+
+        try:
+            download_link = driver.find_element_by_id(link_name)
+        except:
+            Exception(" Selenium couldn't find that element.")  # @todo: Improve this to include the link_name.
+
+        download_link.click()
+
+    # @todo: Return True or False more thoughtfully.
+    return True
+
+
 # Setting subagency_extension default to DOT FTA for testing and demo purposes.
+# @todo: Rename this 'download_files_from_fac' and update index.html accordingly.
 def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
                            subagency_extension=FTA_SUBAGENCY_CODE):
     """
@@ -199,7 +260,16 @@ def download_pdfs_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
 
     time.sleep(1)
 
-    # 10. Click the ‘Download Audits’ button.
+    # 10. Run through and download any SF-SAC forms before moving on to the
+    #     single audit PDFs. That's partly because of how you're handling the
+    #     wait for that one.
+
+    try:
+        download_sf_sac_forms(driver)
+    except:
+        Exception(" There was a problem downloading the SF-SAC forms.")
+
+    # 11. Click the ‘Download Audits’ button.
     driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()
     # Apparently there's no need to then hit the ‘Save’ button. You’ve got your
     # download, a ZIP file of 1) PDFs and 2) a cross-reference spreadsheet of

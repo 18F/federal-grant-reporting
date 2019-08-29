@@ -187,7 +187,7 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
                                              in all agencies.
 
     Returns:
-        A (date) string formatted for the Federal Audit Clearinghouse (MM/DD/YYYY).
+        An HttpResponse. Also, if successful, initiates a set of downloads.
     """
 
     check_for_chromedriver()

@@ -19,12 +19,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/tock.log'),
-            'formatter': 'verbose',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
@@ -33,47 +27,12 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'propagate': True,
             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
         },
         'django.template': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'uaa_client': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'tock-auth': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'tock-employees': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'tock-hours': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'tock-organizations': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'tock-projects': {
-            'handlers': ['console', 'file'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'tock': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'propagate': True,
             'level': 'INFO',
         },

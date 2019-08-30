@@ -105,6 +105,40 @@ def list_completed_chrome_downloads(driver):
         """)
 
 
+def get_pager_links(driver):
+    """
+    When a search yields multiple pages of results, we want to be able to
+    iterate through those multiple pages. This function uses Selenium to
+    retrieve the pager links.
+
+    Args:
+        driver (webdriver): a Selenium webdriver.
+    Returns:
+        A list of pager links (as Selenium objects) if successful, False otherwise
+    """
+
+    pager_links = False
+
+    try:
+        pager = driver.find_element_by_css_selector('tr.GridPager')
+        pager_links = pager.find_elements_by_tag_name('a')
+
+    except:
+        # @todo: Consider whether an exception is actually the most appropriate way to handle this.
+        Exception(" No pager links were found!")
+
+    return pager_links
+
+    # alternately -- and this seems *very* brittle, but: you could look for
+    # link names that are [the next number] and continue until Selenium can't
+    # find any more. Seems especially dodgy because what if there's another
+    # pager somehow?
+
+    # Yet another option: search for the XPATH.
+    # Sample HREF, this one for page 2:
+    # javascript:__doPostBack(&#39;ctl00$MainContent$ucA133SearchResults$ResultsGrid&#39;,&#39;Page$2&#39;)
+
+
 def download_sf_sac_forms(driver):
     """
     Initiate downloads of all SF-SAC forms linked from a results page on the
@@ -267,6 +301,37 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
         download_sf_sac_forms(driver)
     except:
         Exception(" There was a problem downloading the SF-SAC forms.")
+
+    # @todo: PROPERLY INCORPORATE THIS, including giving it a reasonable name.
+    # For right now I'm just trying to check whether it finds the correct elements.
+    pager_links = get_pager_links(driver)
+
+    for link in pager_links:
+        link.click()
+
+        # @todo: check whether you have to do anything else to set it up to be
+        #        able to click a (different) link once the page reloads from
+        #        having clicked the first one.
+
+        # Then initiate another set of downloads.
+        # This has implications for how you approach downloading the single
+        # audit PDFs, too. Better to download them individually from their links
+        # so you don't get taken to a different download page. (Alternately, you
+        # could change the way that that particular wait works... but this is
+        # probably better. Not only because it'll handle interruption more
+        # gracefully.)
+
+        # @todo: Move this and the updated download-the-PDFs approach to their own
+        #        helper function so you can just call that once before dealing with
+        #        pager links, then repeatedly once you have pager links (if you do).
+
+        # @todo: Make this wait more intelligent.
+        time.sleep(1)
+
+        try:
+            download_sf_sac_forms(driver)
+        except:
+            Exception(" There was a problem downloading the SF-SAC forms.")
 
     # 11. Click the ‘Download Audits’ button.
     driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()

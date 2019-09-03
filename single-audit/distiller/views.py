@@ -153,13 +153,54 @@ def get_next_pager_link(driver, page_index):
     return link_to_next_page
 
 
-def download_sf_sac_forms(driver):
+def download_all_linked_files(driver):
     """
-    Initiate downloads of all SF-SAC forms linked from a results page on the
+    Initiate downloads of all files -- currently, SF-SAC forms (as .xls files)
+    and single audit packages (as individual PDFs) -- linked from a results page
+    on the Federal Audit Clearinghouse.
+
+    Args:
+        driver (webdriver): a Selenium webdriver.
+
+    Returns:
+        True if successful, False otherwise
+
+    Room for improvement:
+        Safeguard against the possibilities that you aren't on the correct page,
+        don't have any results, etc.
+
+        (URL should be https://harvester.census.gov/facdissem/SearchResults.aspx)
+    """
+
+    try:
+        download_one_set_of_result_files(driver, 'SF-SAC')
+    except:
+        # @todo: Make this error handling more informative. Add page numbers,
+        #        for instance, and/or something more specific about the file
+        #        that couldn't be downloaded.
+        Exception(" The SF-SAC forms couldn't all be downloaded.")
+
+    try:
+        download_one_set_of_result_files(driver, 'PDF')
+    except:
+        # @todo: Ditto.
+        # @todo: Think through how to most appropriately handle instances in
+        #        which an SF-SAC form is linked but no single audit PDF is
+        #        linked. This sometimes happens with, for instance, tribes.
+        Exception(" The single audit PDFs couldn't all be downloaded.")
+
+
+def download_one_set_of_result_files(driver, file_type):
+    """
+    Initiate downloads of one type of files linked from a results page on the
     Federal Audit Clearinghouse.
 
     Args:
         driver (webdriver): a Selenium webdriver.
+
+        file_type (string): 'SF-SAC', corresponding to the SF-SAC form, or
+                            'PDF', corresponding to a PDF of the single audit
+                            package.
 
     Returns:
         True if successful, False otherwise
@@ -197,10 +238,19 @@ def download_sf_sac_forms(driver):
     #        different filename based on the contents of this search-results-
     #        page table... could get awkward, but it's something to consider.)
 
+    # @todo: Consider reworking this such that 'Form' and 'Audit' are the
+    #        expected values. It's a question of readability.
+    if file_type == 'SF-SAC':
+        name_suffix = 'Form'
+    elif file_type == 'PDF':
+        name_suffix = 'Audit'
+    else:
+        return False
+
     max_number_of_search_results = 25  # numbered 0 through 24. As mentioned above, it'd be good to make this more flexible.
     for i in range(max_number_of_search_results):
-        # Try to locate the relevant SF-SAC form download link.
-        link_name = 'MainContent_ucA133SearchResults_ResultsGrid_lnkbuttonForm_' + str(i)
+        # Try to locate the relevant download link.
+        link_name = 'MainContent_ucA133SearchResults_ResultsGrid_lnkbutton' + name_suffix + '_' + str(i)
 
         try:
             download_link = driver.find_element_by_id(link_name)
@@ -307,17 +357,10 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
 
     time.sleep(1)
 
-    # 10. Run through and download any SF-SAC forms before moving on to the
-    #     single audit PDFs. That's partly because of how you're handling the
-    #     wait for that one.
+    # 10. Run through and download all linked results (SF-SAC forms and single
+    #     audit PDFs).
 
-    try:
-        download_sf_sac_forms(driver)
-    except:
-        Exception(" There was a problem downloading the SF-SAC forms.")
-
-    # @todo: PROPERLY INCORPORATE THIS, including giving it a reasonable name.
-    # For right now I'm just trying to check whether it finds the correct elements.
+    download_all_linked_files(driver)
 
     current_page_index = 1
 
@@ -328,43 +371,22 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
         link_to_next_page.click()
         current_page_index += 1  # @todo: Add better error checking.
 
-        # Then initiate another set of downloads.
-        # This has implications for how you approach downloading the single
-        # audit PDFs, too. Better to download them individually from their links
-        # so you don't get taken to a different download page. (Alternately, you
-        # could change the way that that particular wait works... but this is
-        # probably better. Not only because it'll handle interruption more
-        # gracefully.)
-
-        # @todo: Move this and the updated download-the-PDFs approach to their own
-        #        helper function so you can just call that once before dealing with
-        #        pager links, then repeatedly once you have pager links (if you do).
-
         # @todo: Make this wait more intelligent.
         time.sleep(1)
 
-        try:
-            download_sf_sac_forms(driver)
-        except:
-            Exception(" There was a problem downloading the SF-SAC forms.")
+        # @todo: Now that you're not downloading a ZIP file that includes a
+        #        cross-reference spreadsheet, add a different way to retrieve
+        #        and use the number-to-awardee-name[-and-fiscal-year] crosswalk.
+        download_all_linked_files(driver)
 
         link_to_next_page = get_next_pager_link(driver, current_page_index)
 
-    # 11. Click the ‘Download Audits’ button.
-#    driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()
-    # Apparently there's no need to then hit the ‘Save’ button. You’ve got your
-    # download, a ZIP file of 1) PDFs and 2) a cross-reference spreadsheet of
-    # filenames.
-    #
-    # @todo: Consider elaborating on this such that you unzip the ZIP file and
-    #        rename the filenames to match something clearer, like the grantee
-    #        name and the fiscal year of the report.
-
     # Wait for download(s) to complete, then gets their paths.
-#    paths = WebDriverWait(driver, 500, 1).until(list_completed_chrome_downloads)
+    # @todo: Consider whether saving and returning the paths is overkill.
+    paths = WebDriverWait(driver, 500, 1).until(list_completed_chrome_downloads)
 
-#    if paths:
-#        driver.quit()
+    if paths:
+        driver.quit()
 
     # @todo: Improve the contents of this HttpResponse.
     return HttpResponse("Your download has completed.", content_type="text/plain")

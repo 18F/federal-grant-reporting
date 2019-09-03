@@ -105,38 +105,52 @@ def list_completed_chrome_downloads(driver):
         """)
 
 
-def get_pager_links(driver):
+def get_next_pager_link(driver, page_index):
     """
+    Return a Selenium-clickable link to the next page of results.
+
     When a search yields multiple pages of results, we want to be able to
     iterate through those multiple pages. This function uses Selenium to
-    retrieve the pager links.
+    retrieve the next pager link.
+
+    Why not just return all of the links and iterate through them? Because
+    Selenium will throw a "stale element" exception after the next page load.
 
     Args:
         driver (webdriver): a Selenium webdriver.
-    Returns:
-        A list of pager links (as Selenium objects) if successful, False otherwise
-    """
 
-    pager_links = False
+        page_index (int): an index of the current page number, as reflected in
+                          the results page's built-in pager. Starts from 1.
+
+    Returns:
+        A pager link (as a Selenium object) if successful, False otherwise.
+    """
+    # Try instead looking for link names that are [the next number] and continue
+    # until Selenium can't find any more.
+
+    # Sample HREF, this one for page 2:
+    # javascript:__doPostBack(&#39;ctl00$MainContent$ucA133SearchResults$ResultsGrid&#39;,&#39;Page$2&#39;)
+
+    link_to_next_page = False
 
     try:
         pager = driver.find_element_by_css_selector('tr.GridPager')
-        pager_links = pager.find_elements_by_tag_name('a')
-
     except:
         # @todo: Consider whether an exception is actually the most appropriate way to handle this.
-        Exception(" No pager links were found!")
+        # @todo: Also... consider that Selenium will already throw its own
+        #        exception if it can't find the element. So probably you want to
+        #        take a different approach, somehow.
+        Exception(" No pager was found!")
 
-    return pager_links
+    try:
+        # @todo: Figure out how best to handle the likelihood of a
+        #        NoSuchElementException. Will a simple 'if' statement get it?
+        link_to_next_page = pager.find_element_by_link_text(str(page_index + 1))
+    except:
+        Exception(" No next page was found.")
+        # @todo: Add the page number, to make this more useful for debugging.
 
-    # alternately -- and this seems *very* brittle, but: you could look for
-    # link names that are [the next number] and continue until Selenium can't
-    # find any more. Seems especially dodgy because what if there's another
-    # pager somehow?
-
-    # Yet another option: search for the XPATH.
-    # Sample HREF, this one for page 2:
-    # javascript:__doPostBack(&#39;ctl00$MainContent$ucA133SearchResults$ResultsGrid&#39;,&#39;Page$2&#39;)
+    return link_to_next_page
 
 
 def download_sf_sac_forms(driver):
@@ -304,14 +318,15 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
 
     # @todo: PROPERLY INCORPORATE THIS, including giving it a reasonable name.
     # For right now I'm just trying to check whether it finds the correct elements.
-    pager_links = get_pager_links(driver)
 
-    for link in pager_links:
-        link.click()
+    current_page_index = 1
 
-        # @todo: check whether you have to do anything else to set it up to be
-        #        able to click a (different) link once the page reloads from
-        #        having clicked the first one.
+    link_to_next_page = get_next_pager_link(driver, current_page_index)
+
+    while link_to_next_page:
+        # i.e., until there are no more pager links available:
+        link_to_next_page.click()
+        current_page_index += 1  # @todo: Add better error checking.
 
         # Then initiate another set of downloads.
         # This has implications for how you approach downloading the single
@@ -333,8 +348,10 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
         except:
             Exception(" There was a problem downloading the SF-SAC forms.")
 
+        link_to_next_page = get_next_pager_link(driver, current_page_index)
+
     # 11. Click the ‘Download Audits’ button.
-    driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()
+#    driver.find_element_by_id('MainContent_ucA133SearchResults_btnDownloadZipTop').click()
     # Apparently there's no need to then hit the ‘Save’ button. You’ve got your
     # download, a ZIP file of 1) PDFs and 2) a cross-reference spreadsheet of
     # filenames.
@@ -344,10 +361,10 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     #        name and the fiscal year of the report.
 
     # Wait for download(s) to complete, then gets their paths.
-    paths = WebDriverWait(driver, 500, 1).until(list_completed_chrome_downloads)
+#    paths = WebDriverWait(driver, 500, 1).until(list_completed_chrome_downloads)
 
-    if paths:
-        driver.quit()
+#    if paths:
+#        driver.quit()
 
     # @todo: Improve the contents of this HttpResponse.
     return HttpResponse("Your download has completed.", content_type="text/plain")

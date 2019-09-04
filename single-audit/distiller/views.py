@@ -314,7 +314,10 @@ def download_files_from_fac(agency_prefix=None, subagency_extension=None):
     from_date_field.send_keys(from_date)
     from_date_field.send_keys(Keys.RETURN)
 
-    to_date = _format_date_for_fac_fields(date.today())
+    # Set the "to" date to yesterday, not today, to avoid time zone problems.
+    # @todo: https://github.com/18F/federal-grant-reporting/issues/146
+    yesterday = date.today() - timedelta(1)
+    to_date = _format_date_for_fac_fields(yesterday)
     to_date_field = driver.find_element_by_id('MainContent_UcSearchFilters_DateProcessedControl_ToDate')
     to_date_field.clear()
     to_date_field.send_keys(to_date)

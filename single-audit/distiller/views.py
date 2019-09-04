@@ -346,6 +346,8 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
 
     # 8. A new page loads. Click the ‘I acknowledge that I have read and
     #    understand the above statements’ checkbox.
+    time.sleep(1)
+
     driver.find_element_by_id('chkAgree').click()
 
     # @todo: Replace this with a better 'wait', but the point is to make sure

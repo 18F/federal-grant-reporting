@@ -20,5 +20,5 @@ urlpatterns = [
     path('', distiller_views.prompt_for_agency_name),
     path('get-single-audits-by-agency/', distiller_views.show_agency_level_summary, name='show_relevant_audits'),
     path('generate-a-csv/', distiller_views.offer_download_of_agency_specific_csv, name='prompt_to_save_csv'),
-    path('download-single-audits/', distiller_views.download_pdfs_from_fac, name='download_single_audit_pdfs'),
+    path('download-single-audits/', distiller_views.download_files_from_fac, name='download_single_audit_files'),
 ]

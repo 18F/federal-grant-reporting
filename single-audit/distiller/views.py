@@ -263,9 +263,7 @@ def download_one_set_of_result_files(driver, file_type):
     return True
 
 
-# Setting subagency_extension default to DOT FTA for testing and demo purposes.
-def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
-                            subagency_extension=FTA_SUBAGENCY_CODE):
+def download_files_from_fac(agency_prefix=None, subagency_extension=None):
     """
     Search the Federal Audit Clearinghouse for relevant single audits, then
     download the results.
@@ -287,6 +285,13 @@ def download_files_from_fac(agency_prefix=DEPT_OF_TRANSPORTATION_PREFIX,
     Returns:
         An HttpResponse. Also, if successful, initiates a set of downloads.
     """
+
+    # Setting subagency_extension default to DOT FTA for demo purposes.
+    if agency_prefix is None or type(agency_prefix) is not str:
+        agency_prefix = DEPT_OF_TRANSPORTATION_PREFIX
+
+    if subagency_extension is None:
+        subagency_extension = FTA_SUBAGENCY_CODE
 
     check_for_chromedriver()
 

@@ -1,13 +1,33 @@
-# Federal Grant Reporting Project
-Improving the experience of federal grant reporting.
+# The 10x Federal Grant Reporting project
 
-The 10x Federal Grant Reporting project is building a prospective shared solution for the single audit finding resolution process, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
+## Project description
 
+### The [10x Federal Grant Reporting project](#project-description) is enabling simpler, faster, easier, better resolution of single audit findings by agencies and grantees alike.
+
+To that end, we're building two prospective shared solutions for the single audit finding resolution process.
+
+### SAFR: Single audit finding resolution
+The first element of the prototype, "SAFR," focuses on single audit finding resolution, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
+
+### Distiller
 A second element of the prototype, "Distiller," provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
 
-# Single audit resolution
-Enabling simpler, faster, easier, better resolution of single audit findings by
-agencies and grantees alike.
+## How can you help?
+
+**Federal granting agency**
+If you're someone who works with single audits at a federal agency, we're interested in speaking with you.
+
+[File an issue](https://github.com/18F/federal-grant-reporting/issues) or email us at federal-grant-reporting@gsa.gov
+
+**Independent auditors**
+If you're someone who's worked on single audits, we're interested in talking with you and better understanding your current process and any pain points around creating audits and adding them to the Federal Audit Clearinghouse.
+
+[File an issue](https://github.com/18F/federal-grant-reporting/issues) or email us at federal-grant-reporting@gsa.gov
+
+## What we've done so far
+
+For background and context, see [this project's history](/project-history.md).
+
 
 ## Local installation
 

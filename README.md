@@ -14,15 +14,21 @@ A second element of the prototype, "Distiller," provides easier access to data, 
 
 ## How can you help?
 
-**Federal granting agency**
+### Federal granting agency
 If you're someone who works with single audits at a federal agency, we're interested in speaking with you.
 
-[File an issue](https://github.com/18F/federal-grant-reporting/issues) or email us at federal-grant-reporting@gsa.gov
+[File an issue](https://github.com/18F/federal-grant-reporting/issues/new) or email us at federal-grant-reporting@gsa.gov.
 
-**Independent auditors**
-If you're someone who's worked on single audits, we're interested in talking with you and better understanding your current process and any pain points around creating audits and adding them to the Federal Audit Clearinghouse.
+### Independent auditors
+If you're someone who's created single audits, we're interested in talking with you and better understanding your current process and any pain points around creating audits and adding them to the Federal Audit Clearinghouse.
 
-[File an issue](https://github.com/18F/federal-grant-reporting/issues) or email us at federal-grant-reporting@gsa.gov
+[File an issue](https://github.com/18F/federal-grant-reporting/issues/new) or email us at federal-grant-reporting@gsa.gov.
+
+### Grantees
+If you've developed corrective action plans or been involved in single audit finding resolution, we'd love to talk.
+
+[File an issue](https://github.com/18F/federal-grant-reporting/issues/new) or email us at federal-grant-reporting@gsa.gov.
+
 
 ## What we've done so far
 

@@ -22,7 +22,6 @@ from .forms import AgencySelectionForm, __get_agency_name_from_prefix, __is_vali
 DIRECTORY_NAME = 'single_audit_data_dump'
 FILES_DIRECTORY = os.path.join(settings.BASE_DIR, 'distiller', DIRECTORY_NAME)
 
-CHROME_DRIVER_LOCATION = os.path.join(settings.BASE_DIR, 'distiller/chromedriver')
 FAC_URL = 'https://harvester.census.gov/facdissem/SearchA133.aspx'
 
 DEPT_OF_TRANSPORTATION_PREFIX = '20'
@@ -72,7 +71,7 @@ def check_for_chromedriver():
     """
 
     try:
-        chromedriver = open(CHROME_DRIVER_LOCATION)
+        chromedriver = open(settings.CHROME_DRIVER_LOCATION)
         chromedriver.close()
     except IOError:
         # @todo: Make this error message more informative without potentially
@@ -295,7 +294,12 @@ def download_files_from_fac(agency_prefix=None, subagency_extension=None):
 
     check_for_chromedriver()
 
-    driver = webdriver.Chrome(CHROME_DRIVER_LOCATION)  # Optional argument, if not specified will search path.
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+
+    driver = webdriver.Chrome(settings.CHROME_DRIVER_LOCATION, chrome_options=chrome_options)
 
     # 1. Go to the Federal Audit Clearinghouse's search page.
     driver.get(FAC_URL)

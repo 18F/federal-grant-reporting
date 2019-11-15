@@ -8,12 +8,12 @@ verify_ssl = true
 [packages]
 selenium = "*"
 django = ">=2.2.4"
-jinja2 = "*"
 psycopg2-binary = "*"
 django-localflavor = "*"
 pandas = "*"
 datetime = "*"
 whitenoise = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"

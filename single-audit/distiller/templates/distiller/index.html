@@ -7,7 +7,7 @@
       <h1>Select your agency:</h1>
     </div>
     <div class="grid-col-6">
-      <form action="/download-single-audits/" method="get" class="usa-form">
+      <form action="{% url 'distiller:download_single_audit_files' %}" method="get" class="usa-form">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit" class="usa-button">

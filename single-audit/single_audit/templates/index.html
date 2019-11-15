@@ -1,0 +1,13 @@
+{% extends 'single_audit/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="grid-container">
+        <div class="grid-row">
+            <ul>
+                <li><a href="{% url 'distiller:home'  %}">Distiller</a></li>
+                <li><a href="{% url 'findings:list'  %}">Single Audit findings</a></li>
+            </ul>
+        </div>
+      </div>
+{% endblock %}

@@ -15,8 +15,6 @@ def validate_cfda_number(number):
 
 
 # https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
-class User(AbstractUser):
-    pass
 
 
 class Grantee(models.Model):
@@ -105,7 +103,8 @@ class Finding(models.Model):
         ordering = ('-status',)
 
     def get_absolute_url(self):
-        return "/finding/%i/" % self.id
+        from django.urls import reverse
+        return reverse("findings:details", args=[str(self.id)])
 
     def __str__(self):
         return self.name

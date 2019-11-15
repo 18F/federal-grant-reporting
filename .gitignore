@@ -17,3 +17,5 @@ node_modules
 data_analysis
 */backups
 *.bak
+
+.vscode

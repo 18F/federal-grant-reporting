@@ -35,71 +35,36 @@ If you've developed corrective action plans or been involved in single audit fin
 For background and context, see [this project's history](/project-history.md).
 
 
-## Local installation
+## Local development
 
-This is a Django app designed to run on Python 3.7.3.
-[pipenv](https://pipenv.readthedocs.io) is recommended for creating a virtual
-environment and managing dependencies. If you don't already have `pipenv`
-installed:
+1. Install [Docker][]. If you're on OS X, install Docker for Mac. If you're on Windows, install Docker for Windows.
 
-1. Run `pip --version` and confirm that your `pip` uses Python 3, not Python 2, then
-2. Install pipenv by running `pip install pipenv`.
+1. Move into the `single-audit` directory at the repository root:
 
-Now you can prepare your development environment by running:
+  ```
+  $ cd single-audit
+  ```
 
-```
-git clone git@github.com:18F/federal-grant-reporting.git
-cd federal-grant-reporting
-cd single-audit
-pipenv shell
-pipenv install
-```
+1. Run the three following commands:
 
-You will also need to set up a local [PostgreSQL](https://www.postgresql.org) database that matches the configuration in `single-audit/single_audit/settings/development.py`. (Alternately, you can create a local database and user and update the app's configuration to match.)
+  ```shell
+  docker-compose build
+  docker-compose run app python manage.py migrate
+  docker-compose run app python manage.py createsuperuser
+  ```
 
-First, create a new Postgres database from the command line:
+1. Once the above commands are successful, run:
 
-```bash
-createdb FGR_LOCAL_DB
-```
+  ```
+  docker-compose up
+  ```
 
-Then, once you are logged into the FGR_LOCAL_DB Postgres database:
+  This will start up all required servers in containers and output their
+  log information to stdout.
 
-```SQL
-CREATE USER fgr_local_user;
-\password fgr_local_user;
-{enter the password defined in development.py}
-```
+1. Visit [http://localhost:8000/][] directly to access the site.
 
-At this point, if you try running the project locally, you may see a message like: "You have 17 unapplied migration(s)..."
-
-Apply these migrations to your local database:
-
-```bash
-python manage.py migrate --settings=single_audit.settings.development
-```
-
-Now you can start the project locally:
-
-```bash
-./manage.py runserver --settings=single_audit.settings.development
-```
-
-The app should now be running at http://localhost:8000 or http://127.0.0.1:8000.
-
-### Creating a superuser
-
-The Django project contains an admin interface at `/admin`.
-
-To access the admin interface, you'll need to create a superuser first. Run the following on your command line to create a superuser on your local machine:
-
-```
-./manage.py createsuperuser --settings=single_audit.settings.development
-```
-
-You will be prompted to supply a username, email, and password.
-
-Having completed that process, you will be able to access the admin interface at `/admin` using your new superuser account.
+You can access the admin panel at `/admin` by logging in with the super user credentials you created in the step above.
 
 ### Create sample finding data
 
@@ -109,7 +74,7 @@ Start by adding and saving a new finding: http://127.0.0.1:8000/admin/resolve_fi
 
 ### See the project locally
 
-Once your new finding record is saved, visit http://127.0.0.1:8000/finding/1/ to see the Finding Resolution Page.
+Once your new finding record is saved, visit http://127.0.0.1:8000/findings/1/ to see the Finding Resolution Page.
 
 Here is what that page looks like as of June 2019:
 
@@ -154,3 +119,6 @@ This project is in the worldwide [public domain](LICENSE.md). As stated in [CONT
 > This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 >
 > All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
+
+[Docker]: https://www.docker.com/
+[http://localhost:8000/]: http://localhost:8000/

@@ -1,0 +1,20 @@
+app:
+  build: .
+  volumes:
+    - .:/single_audit
+  links:
+    - db
+  working_dir: /single_audit
+  environment:
+    - DATABASE_URL=postgres://postgres@db/single_audit
+    - DJANGO_SETTINGS_MODULE=single_audit.settings.development
+  stdin_open: true
+  tty: true
+  ports:
+    - "8000:8000"
+  command: "python manage.py runserver 0.0.0.0:8000"
+db:
+  image: postgres:9.6.8
+  environment:
+    - POSTGRES_DB=single_audit
+    - POSTGRES_USER=postgres

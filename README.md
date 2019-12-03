@@ -42,7 +42,7 @@ For background and context, see [this project's history](/project-history.md).
 2. Open terminal (Mac) or command line (PC) and “enter” to move into the `single-audit` directory at the repository root:
 
   ```
-  $ cd single-audit
+  cd single-audit
   ```
 
 3. Run the three following commands:

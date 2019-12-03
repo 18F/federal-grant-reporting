@@ -6,29 +6,29 @@
 
 To that end, we're building two prospective shared solutions for the single audit finding resolution process.
 
-### SAFR: Single audit finding resolution
-The first element of the prototype, "SAFR," focuses on single audit finding resolution, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
-
 ### Distiller
-A second element of the prototype, "Distiller," provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
+Distiller, provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
+
+### SAFR: Single audit finding resolution
+SAFR, focuses on single audit finding resolution, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
+
 
 ## How can you help?
 
 ### Federal granting agency
-If you're someone who works with single audits at a federal agency, we're interested in speaking with you.
+If you're someone who works with single audits at a federal agency, we're interested in speaking with you. 
 
-[File an issue](https://github.com/18F/federal-grant-reporting/issues/new) or email us at federal-grant-reporting@gsa.gov.
+Email the team at federal-grant-reporting@gsa.gov or [File an issue](https://github.com/18F/federal-grant-reporting/issues/new).
 
 ### Independent auditors
 If you're someone who's created single audits, we're interested in talking with you and better understanding your current process and any pain points around creating audits and adding them to the Federal Audit Clearinghouse.
 
-[File an issue](https://github.com/18F/federal-grant-reporting/issues/new) or email us at federal-grant-reporting@gsa.gov.
+Email the team at federal-grant-reporting@gsa.gov or [File an issue](https://github.com/18F/federal-grant-reporting/issues/new).
 
 ### Grantees
 If you've developed corrective action plans or been involved in single audit finding resolution, we'd love to talk.
 
-[File an issue](https://github.com/18F/federal-grant-reporting/issues/new) or email us at federal-grant-reporting@gsa.gov.
-
+Email the team at federal-grant-reporting@gsa.gov or [File an issue](https://github.com/18F/federal-grant-reporting/issues/new).
 
 ## What we've done so far
 
@@ -39,21 +39,27 @@ For background and context, see [this project's history](/project-history.md).
 
 1. Install [Docker][]. If you're on OS X, install Docker for Mac. If you're on Windows, install Docker for Windows.
 
-1. Move into the `single-audit` directory at the repository root:
+2. Open terminal (Mac) or command line (PC) and “enter” to move into the `single-audit` directory at the repository root:
 
   ```
   $ cd single-audit
   ```
 
-1. Run the three following commands:
+3. Run the three following commands:
 
   ```shell
-  docker-compose build
+  docker-compose build 
   docker-compose run app python manage.py migrate
   docker-compose run app python manage.py createsuperuser
   ```
 
-1. Once the above commands are successful, run:
+`docker-compose build` builds the containers by pulling down a number of libraries which take a few minutes to download and install but you only do this once. 
+
+`docker-compose run app python manage.py migrate` runs a Django command to create the database and the tables and columns. 
+
+`docker-compose run app python manage.py createsuperuser` creates an account to access admin panel.
+
+4. Once the above commands are successful, run:
 
   ```
   docker-compose up
@@ -62,7 +68,7 @@ For background and context, see [this project's history](/project-history.md).
   This will start up all required servers in containers and output their
   log information to stdout.
 
-1. Visit [http://localhost:8000/][] directly to access the site.
+5. Visit [http://localhost:8000/][] directly to access the site.
 
 You can access the admin panel at `/admin` by logging in with the super user credentials you created in the step above.
 

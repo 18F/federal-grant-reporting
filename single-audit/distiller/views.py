@@ -139,14 +139,14 @@ def get_next_pager_link(driver, page_index):
         # @todo: Also... consider that Selenium will already throw its own
         #        exception if it can't find the element. So probably you want to
         #        take a different approach, somehow.
-        Exception(" No pager was found!")
+        raise Exception(" No pager was found!")
 
     try:
         # @todo: Figure out how best to handle the likelihood of a
         #        NoSuchElementException. Will a simple 'if' statement get it?
         link_to_next_page = pager.find_element_by_link_text(str(page_index + 1))
     except:
-        Exception(" No next page was found.")
+        raise Exception(" No next page was found.")
         # @todo: Add the page number, to make this more useful for debugging.
 
     return link_to_next_page
@@ -177,7 +177,7 @@ def download_all_linked_files(driver):
         # @todo: Make this error handling more informative. Add page numbers,
         #        for instance, and/or something more specific about the file
         #        that couldn't be downloaded.
-        Exception(" The SF-SAC forms couldn't all be downloaded.")
+        raise Exception(" The SF-SAC forms couldn't all be downloaded.")
 
     try:
         download_one_set_of_result_files(driver, 'PDF')
@@ -186,7 +186,7 @@ def download_all_linked_files(driver):
         # @todo: Think through how to most appropriately handle instances in
         #        which an SF-SAC form is linked but no single audit PDF is
         #        linked. This sometimes happens with, for instance, tribes.
-        Exception(" The single audit PDFs couldn't all be downloaded.")
+        raise Exception(" The single audit PDFs couldn't all be downloaded.")
 
 
 def download_one_set_of_result_files(driver, file_type):
@@ -254,7 +254,7 @@ def download_one_set_of_result_files(driver, file_type):
         try:
             download_link = driver.find_element_by_id(link_name)
         except:
-            Exception(" Selenium couldn't find that element.")  # @todo: Improve this to include the link_name.
+            raise Exception(" Selenium couldn't find that element.")  # @todo: Improve this to include the link_name.
 
         download_link.click()
 
@@ -308,6 +308,7 @@ def download_files_from_fac(agency_prefix=None, subagency_extension=None):
     # 2. Click the “General Information” accordion. Otherwise Selenium will
     #    throw an "Element Not Interactable" exception.
     driver.find_element_by_id('ui-id-1').click()
+    time.sleep(1)
 
     # 3. To get all recent results, enter [90 days ago] and today into the
     #    “FAC Release Date” fields (“From” and “To,” respectively).
@@ -330,6 +331,7 @@ def download_files_from_fac(agency_prefix=None, subagency_extension=None):
     # 4. Click the ‘Federal Awards’ accordion, so the elements under it will be
     #    'interactable.'
     driver.find_element_by_id('ui-id-5').click()
+    time.sleep(1)
 
     # 5. Search by CFDA number:
     driver.find_element_by_id('MainContent_UcSearchFilters_CDFASelectionControl_SelectionControlTable')
@@ -441,7 +443,7 @@ def __get_findings(agency_df):
 
     except:
         # @todo: Figure out what exception to actually raise here.
-        Exception(" Error generating findings dataframe.")
+        raise Exception(" Error generating findings dataframe.")
 
 
 def __get_number_of_findings(agency_df):
@@ -458,7 +460,7 @@ def __get_number_of_findings(agency_df):
         return len(findings_df.index)
 
     except:
-        Exception(" Error getting number of findings.")
+        raise Exception(" Error getting number of findings.")
 
 
 def filter_general_table_by_agency(agency_prefix, filename="gen18.txt"):

@@ -2,9 +2,7 @@
 Enabling simpler, faster, easier, better resolution of single audit findings by
 agencies and grantees alike.
 
-The 10x Federal Grant Reporting project is building a prospective shared solution for the single audit finding resolution process, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
-
-A second element of the prototype, "Distiller," provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
+The 10x Federal Grant Reporting project is building a prospective shared solution for specific touchpoints along the single audit finding resolution process to provides easier access to audit data. For up to date information about this project see the project [readme](https://github.com/18F/federal-grant-reporting/blob/master/README.md) This stands to help auditors, grant managers, and agency CFOs as well as grantees.
 
 ## How can you help?
 

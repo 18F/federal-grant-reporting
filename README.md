@@ -4,13 +4,17 @@
 
 ### The [10x Federal Grant Reporting project](#project-description) is enabling simpler, faster, easier, better resolution of single audit findings by agencies and grantees alike.
 
-To that end, we're building two prospective shared solutions for the single audit finding resolution process.
+To that end, we're building prospective shared solutions for the single audit finding resolution process.
 
 ### Distiller
 Distiller, provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
 
-### SAFR: Single audit finding resolution
-SAFR, focuses on single audit finding resolution, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
+### PDF Audit Data Extractor 
+This prototype will locate all findings in any audit pdf and extracts specific information about each audit findings. Namely Audit finding texts and Grantee responses to start. Ultimately the goal is to improve entering data into the Federal Audit Clearinghouse. When uploading a single audit pdf, the PDF Audit Data Extractor will extract and pre-populate finding information into the data collection form so that auditors or grantees can  review and confirm the data rather than requiring them to copy and paste or retype critical data. When you consider that for each finding, multiple fields are required to be filled out, and the number of audit findings each year, the time savings is considerable. One outside auditor for a state audit said he typically sees 100 findings in each years audit and that this could save 1.5 hours to his work and another 1.5 hours to the grantees staff time considering the additional fields added to the data collection form.
+
+### Earlier prototypes explored 
+_SAFR: Single audit finding resolution,_ focuses on single audit finding resolution, which is a high-priority element of post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
+
 
 
 ## How can you help?

@@ -98,6 +98,7 @@ patterns = [
     # primary criteria
     {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern('corrective action plan')},
     {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern('corrective action')},
+    {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern('planned corrective actions')},
     # secondary criteria: used to identify where the audit is
     {'label': 'CONDITION', 'pattern': [{'LOWER': 'observation'}]},
     {'label': 'CONDITION', 'pattern': [{'LOWER': 'condition'}]},
@@ -111,6 +112,22 @@ patterns = [
     {'label': 'RECOMMENDATION', 'pattern': [{'LOWER': {'REGEX': 'recommendations?'}}]},
     {'label': 'RESPONSE', 'pattern': [{'LOWER': 'response'}]},
 ]
+
+# a sample of different headers that start audit findings
+headers = [
+    'federal award findings and questioned costs',
+    'financial statement findings',
+    'findings and questioned costs – major federal award programs audit',
+    'findings – financial statement audit',
+    'findings related to the financial statements',
+    'major federal award findings and questioned costs',
+    'schedule of findings and questioned costs',
+    'summary schedule of prior audit findings',
+]
+
+for header in headers:
+    pattern = {'label': 'HEADER', 'pattern': split_pattern(header)}
+    patterns.append(pattern)
 
 nlp = spacy.load('en_core_web_sm') # or 'en'
 ruler = EntityRuler(nlp, overwrite_ents=True)

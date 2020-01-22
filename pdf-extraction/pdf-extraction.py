@@ -46,24 +46,6 @@ def pdf2textCached(filename):
             fd.write(text)
     return '\n'.join(open(textfilename, 'r+').readlines())
 
-def sentences(doc, text, what, startwith=False):
-    """
-    Given a document with named entities, extract the sentence
-    belonging to the named entity.
-    """
-    result = []
-    for index, ent in enumerate(doc.ents):
-        if ent.label_ == what:
-            sentence = ent.sent.string
-            # make sure we start with the given text
-            if startwith and not sentence.startswith(ent.text):
-                index = sentence.index(ent.text)
-                sentence = sentence[index:]
-            # replace whitespace and newlines
-            sentence = sentence.strip().replace('\n', '')
-            result.append(sentence)
-    return result
-
 def expand_audit_numbers(doc):
     """
     We cannot use a conventional pipe here, because spacy sometimes
@@ -80,6 +62,48 @@ def expand_audit_numbers(doc):
             new_ents.append(span)
     doc.ents = new_ents
     return doc
+
+def sentences(doc, what):
+    """
+    Given a document with named entities, extract the sentence
+    belonging to the named entity.
+    """
+    return [ent.sent for ent in doc.ents if ent.label_ == what]
+
+def get_page_limit(sentence, limit=50):
+    """
+    Assume a page is approximately `limit` words. We could do better by
+    leveraging PDF parsing here.
+    """
+    rest = sentence.doc[sentence.start:]
+    words = rest.text.split(' ')
+    length = len(words)
+    if length > limit: words = words[0:limit]
+    return len(' '.join(words))
+
+def extract_findings(doc):
+    """
+    Given a header, examine the relevant context and see if we have a
+    finding on our hands. This is a quick and dirty heuristic: we want
+    to over-capture here.
+    """
+    secondaries = ['CONDITION', 'CRITERIA', 'CONTEXT', 'CAUSE', 'EFFECT', 'RECOMMENDATION', 'RESPONSE']
+    findings = []
+    for sentence in sentences(doc, 'HEADER'):
+        limit = sentence.start + get_page_limit(sentence)
+        count = 0
+        for ent in doc.ents:
+            if ent.start > sentence.start and ent.end < limit:
+                if ent.label_ in secondaries:
+                    count += 1
+                if ent.label in ['AUDIT_NUMBER']:
+                    # we almost certainly have a finding if we have a
+                    # header followed by an audit number
+                    count += 3
+        if count > 3:
+            finding = doc[sentence.start:limit].text.strip().replace('\n', '')
+            findings.append(finding)
+    return findings
 
 def nlp_results(doc):
     return [(ent.text.strip(), ent.label_) for ent in doc.ents]
@@ -119,7 +143,7 @@ headers = [
     'financial statement findings',
     'findings and questioned costs – major federal award programs audit',
     'findings – financial statement audit',
-    'findings related to the financial statements',
+    'findings related to the financial statements'
     'major federal award findings and questioned costs',
     'schedule of findings and questioned costs',
     'summary schedule of prior audit findings',
@@ -133,7 +157,7 @@ nlp = spacy.load('en_core_web_sm') # or 'en'
 ruler = EntityRuler(nlp, overwrite_ents=True)
 sentencizer = nlp.create_pipe('sentencizer')
 ruler.add_patterns(patterns)
-nlp.add_pipe(sentencizer, first=True)
+# nlp.add_pipe(sentencizer, first=True)
 nlp.add_pipe(expand_audit_numbers, first=True)
 nlp.add_pipe(ruler)
 
@@ -147,8 +171,4 @@ if not audits:
     sys.exit(1)
 
 print('found the following audit numbers:', audits)
-
-print('*** sentence extracts')
-for pattern in ['CORRECTIVE_ACTION', 'AUDIT_NUMBER']:
-    print(pattern, sentences(doc, sample, pattern))
-print('*** end sentence extracts')
+print(extract_findings(doc))

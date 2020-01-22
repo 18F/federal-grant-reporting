@@ -30,7 +30,7 @@ def pdf2text(path, number=None):
             for index, page in enumerate(allpages):
                 if index == number:
                     interpreter.process_page(page)
-        text = retstr.getvalue()
+        text = retstr.getvalue().replace('\u00a0', ' ')
     device.close()
     retstr.close()
     return text
@@ -118,11 +118,27 @@ if len(sys.argv) != 2 and len(sys.argv) != 3:
     print('usage: ', sys.argv[0], '<file.pdf>', '<page?>')
     sys.exit(1)
 
+# a sample of different headers that start audit findings
+headers = [
+    'federal award findings and questioned costs',
+    'financial statement findings',
+    'findings and questioned costs – major federal award programs audit',
+    'findings – financial statement audit',
+    'findings related to the financial statements'
+    'major federal award findings and questioned costs',
+    'schedule of findings and questioned costs',
+    'summary schedule of prior audit findings',
+]
+
+# phrases that may indicate CAP text
+corrective_actions = [
+    'corrective action',
+    'corrective action plan',
+    'planned corrective actions',
+    'planned corrective action'
+]
+
 patterns = [
-    # primary criteria
-    {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern('corrective action plan')},
-    {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern('corrective action')},
-    {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern('planned corrective actions')},
     # secondary criteria: used to identify where the audit is
     {'label': 'CONDITION', 'pattern': [{'LOWER': 'observation'}]},
     {'label': 'CONDITION', 'pattern': [{'LOWER': 'condition'}]},
@@ -137,27 +153,19 @@ patterns = [
     {'label': 'RESPONSE', 'pattern': [{'LOWER': 'response'}]},
 ]
 
-# a sample of different headers that start audit findings
-headers = [
-    'federal award findings and questioned costs',
-    'financial statement findings',
-    'findings and questioned costs – major federal award programs audit',
-    'findings – financial statement audit',
-    'findings related to the financial statements'
-    'major federal award findings and questioned costs',
-    'schedule of findings and questioned costs',
-    'summary schedule of prior audit findings',
-]
-
 for header in headers:
     pattern = {'label': 'HEADER', 'pattern': split_pattern(header)}
+    patterns.append(pattern)
+
+for cap in corrective_actions:
+    pattern = {'label': 'CORRECTIVE_ACTION', 'pattern': split_pattern(cap)}
     patterns.append(pattern)
 
 nlp = spacy.load('en_core_web_sm') # or 'en'
 ruler = EntityRuler(nlp, overwrite_ents=True)
 sentencizer = nlp.create_pipe('sentencizer')
 ruler.add_patterns(patterns)
-# nlp.add_pipe(sentencizer, first=True)
+nlp.add_pipe(sentencizer, first=True)
 nlp.add_pipe(expand_audit_numbers, first=True)
 nlp.add_pipe(ruler)
 
@@ -172,3 +180,4 @@ if not audits:
 
 print('found the following audit numbers:', audits)
 print(extract_findings(doc))
+print(sentences(doc, 'CORRECTIVE_ACTION'))

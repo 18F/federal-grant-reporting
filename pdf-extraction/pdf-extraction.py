@@ -30,7 +30,9 @@ def pdf2text(path, number=None):
             for index, page in enumerate(allpages):
                 if index == number:
                     interpreter.process_page(page)
-        text = retstr.getvalue().replace('\u00a0', ' ')
+        text = retstr.getvalue()
+        text = text.replace('\u00a0', ' ') # no-break space
+        text = text.replace('\u000c', ' ') # vertical tab
     device.close()
     retstr.close()
     return text
@@ -69,6 +71,46 @@ def sentences(doc, what):
     belonging to the named entity.
     """
     return [ent.sent for ent in doc.ents if ent.label_ == what]
+
+def clean(s): return s.strip().replace('\n', ' ')
+
+def paragraphs(doc, what, startswith=False):
+    """
+    Given a document with named entities, extract the paragraph
+    belonging to the named entity.
+    """
+    start = False
+    overflow = 0
+    current_sentence = ''
+    sentences = []
+    for sent in doc.sents:
+        labels = [ent.label_ for ent in sent.ents]
+        if what in labels:
+            text = sent.text
+            if startswith:
+                index = labels.index(what)
+                start = sent.ents[index].start
+                text = doc[start:sent.end].text
+            current_sentence = text
+            start = True
+            overflow = 0
+        else:
+            if start:
+                if not '\n\n\n' in sent.text:
+                    current_sentence += sent.text
+                    overflow += 1
+                else:
+                    sentences.append(clean(current_sentence))
+                    current_sentence = ''
+                    start = False
+                    overflow = 0
+                if overflow > 20:
+                    # prevent excessively large text dumps
+                    sentences.append(clean(current_sentence))
+                    current_sentence = ''
+                    start = False
+                    overflow = 0
+    return sentences
 
 def get_page_limit(sentence, limit=50):
     """
@@ -179,5 +221,5 @@ if not audits:
     sys.exit(1)
 
 print('found the following audit numbers:', audits)
-print(extract_findings(doc))
-print(sentences(doc, 'CORRECTIVE_ACTION'))
+# print(extract_findings(doc))
+print('\n\n***'.join([paragraph for paragraph in paragraphs(doc, 'CORRECTIVE_ACTION', startswith=True)]))

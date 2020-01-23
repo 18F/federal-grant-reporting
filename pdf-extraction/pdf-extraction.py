@@ -86,10 +86,14 @@ def paragraphs(doc, what, startswith=False, experimental=False):
     """
     start = False
     overflow = 0
+    current_audit = None
     current_sentence = ''
     sentences = []
     for sent in doc.sents:
         labels = [ent.label_ for ent in sent.ents]
+        if 'AUDIT_NUMBER' in labels:
+            index = labels.index('AUDIT_NUMBER')
+            current_audit = sent.ents[index].text
         if what in labels:
             if experimental:
                 # experimental: if we have a secondary then we likely
@@ -110,13 +114,13 @@ def paragraphs(doc, what, startswith=False, experimental=False):
                     current_sentence += sent.text
                     overflow += 1
                 else:
-                    sentences.append(clean(current_sentence))
+                    sentences.append((current_audit, clean(current_sentence)))
                     current_sentence = ''
                     start = False
                     overflow = 0
                 if overflow > 20:
                     # prevent excessively large text dumps
-                    sentences.append(clean(current_sentence))
+                    sentences.append((current_audit, (clean(current_sentence))))
                     current_sentence = ''
                     start = False
                     overflow = 0
@@ -242,6 +246,8 @@ caps = paragraphs(doc, 'CORRECTIVE_ACTION', startswith=True)
 with open(outputfile, 'w') as f:
     writer = csv.writer(f)
     writer.writerow(['Associated Audit Number(s)', 'Audit Findings', 'Corrective Action Plan'])
-    for (audits, finding) in findings:
+    for finding, cap in zip(findings, caps):
+        (audits, finding_text) = finding
+        (_, cap_text) = cap
         audit_string = ' and '.join(sorted(audits))
-        writer.writerow([audit_string, finding])
+        writer.writerow([audit_string, finding_text, cap_text])

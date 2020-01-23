@@ -240,14 +240,13 @@ if not audits:
     print('No audit numbers found; it is likely this PDF has no findings.')
     sys.exit(1)
 
-findings = extract_findings(doc)
+findings = paragraphs(doc, 'HEADER', startswith=True)
 caps = paragraphs(doc, 'CORRECTIVE_ACTION', startswith=True)
 
 with open(outputfile, 'w') as f:
     writer = csv.writer(f)
     writer.writerow(['Associated Audit Number(s)', 'Audit Findings', 'Corrective Action Plan'])
     for finding, cap in zip(findings, caps):
-        (audits, finding_text) = finding
-        (_, cap_text) = cap
-        audit_string = ' and '.join(sorted(audits))
-        writer.writerow([audit_string, finding_text, cap_text])
+        (_, finding_text) = finding
+        (audits, cap_text) = cap
+        writer.writerow([audits, finding_text, cap_text])

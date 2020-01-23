@@ -11,6 +11,7 @@ from io import StringIO
 import os
 import sys
 import re
+import csv
 
 def pdf2text(path, number=None):
     """
@@ -72,7 +73,11 @@ def sentences(doc, what):
     """
     return [ent.sent for ent in doc.ents if ent.label_ == what]
 
-def clean(s): return s.strip().replace('\n', ' ')
+def clean(s):
+    result = s.strip().replace('\n', ' ')
+    while '  ' in result:
+        result = result.replace('  ', ' ')
+    return result
 
 def paragraphs(doc, what, startswith=False, experimental=False):
     """
@@ -123,6 +128,8 @@ def get_page_limit(sentence, limit=50):
     leveraging PDF parsing here.
     """
     rest = sentence.doc[sentence.start:]
+    # index = rest.text.find('\n\n')
+    # return sentence.start + index
     words = rest.text.split(' ')
     length = len(words)
     if length > limit: words = words[0:limit]
@@ -137,18 +144,20 @@ def extract_findings(doc):
     findings = []
     for sentence in sentences(doc, 'HEADER'):
         limit = sentence.start + get_page_limit(sentence)
+        captured_audit = []
         count = 0
         for ent in doc.ents:
             if ent.start > sentence.start and ent.end < limit:
                 if ent.label_ in secondaries:
                     count += 1
-                if ent.label in ['AUDIT_NUMBER']:
+                if ent.label_ in ['AUDIT_NUMBER']:
                     # we almost certainly have a finding if we have a
                     # header followed by an audit number
                     count += 3
+                    captured_audit.append(ent.text)
         if count > 3:
-            finding = doc[sentence.start:limit].text.strip().replace('\n', '')
-            findings.append(finding)
+            finding = clean(doc[sentence.start:limit].text)
+            findings.append((captured_audit, finding))
     return findings
 
 def nlp_results(doc):
@@ -218,7 +227,8 @@ nlp.add_pipe(expand_audit_numbers, first=True)
 nlp.add_pipe(ruler)
 
 filename = sys.argv[1]
-pagenumber = int(sys.argv[2]) if len(sys.argv) == 3 else None
+outputfile = sys.argv[2] if len(sys.argv) == 3 else 'test.csv'
+pagenumber = None # int(sys.argv[2]) if len(sys.argv) == 3 else None
 sample = pdf2textCached(filename) if not pagenumber else pdf2text(filename, number=pagenumber)
 doc = nlp(sample)
 audits = audit_numbers(doc)
@@ -226,6 +236,12 @@ if not audits:
     print('No audit numbers found; it is likely this PDF has no findings.')
     sys.exit(1)
 
-print('found the following audit numbers:', audits)
-# print(extract_findings(doc))
-print('\n\n***'.join([paragraph for paragraph in paragraphs(doc, 'CORRECTIVE_ACTION', startswith=True)]))
+findings = extract_findings(doc)
+caps = paragraphs(doc, 'CORRECTIVE_ACTION', startswith=True)
+
+with open(outputfile, 'w') as f:
+    writer = csv.writer(f)
+    writer.writerow(['Associated Audit Number(s)', 'Audit Findings', 'Corrective Action Plan'])
+    for (audits, finding) in findings:
+        audit_string = ' and '.join(sorted(audits))
+        writer.writerow([audit_string, finding])

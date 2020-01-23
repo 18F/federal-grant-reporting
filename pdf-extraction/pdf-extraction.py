@@ -31,8 +31,8 @@ def pdf2text(path, number=None):
                 if index == number:
                     interpreter.process_page(page)
         text = retstr.getvalue()
-        text = text.replace('\u00a0', ' ') # no-break space
-        text = text.replace('\u000c', ' ') # vertical tab
+        # text = text.replace('\u00a0', ' ') # no-break space
+        # text = text.replace('\u000c', ' ') # vertical tab
     device.close()
     retstr.close()
     return text
@@ -74,7 +74,7 @@ def sentences(doc, what):
 
 def clean(s): return s.strip().replace('\n', ' ')
 
-def paragraphs(doc, what, startswith=False):
+def paragraphs(doc, what, startswith=False, experimental=False):
     """
     Given a document with named entities, extract the paragraph
     belonging to the named entity.
@@ -86,6 +86,11 @@ def paragraphs(doc, what, startswith=False):
     for sent in doc.sents:
         labels = [ent.label_ for ent in sent.ents]
         if what in labels:
+            if experimental:
+                # experimental: if we have a secondary then we likely
+                # accidentally hit the audit finding itself.
+                if set(labels).intersection(set(secondaries)):
+                    continue
             text = sent.text
             if startswith:
                 index = labels.index(what)
@@ -129,7 +134,6 @@ def extract_findings(doc):
     finding on our hands. This is a quick and dirty heuristic: we want
     to over-capture here.
     """
-    secondaries = ['CONDITION', 'CRITERIA', 'CONTEXT', 'CAUSE', 'EFFECT', 'RECOMMENDATION', 'RESPONSE']
     findings = []
     for sentence in sentences(doc, 'HEADER'):
         limit = sentence.start + get_page_limit(sentence)
@@ -194,6 +198,8 @@ patterns = [
     {'label': 'RECOMMENDATION', 'pattern': [{'LOWER': {'REGEX': 'recommendations?'}}]},
     {'label': 'RESPONSE', 'pattern': [{'LOWER': 'response'}]},
 ]
+
+secondaries = [pattern["label"] for pattern in patterns]
 
 for header in headers:
     pattern = {'label': 'HEADER', 'pattern': split_pattern(header)}

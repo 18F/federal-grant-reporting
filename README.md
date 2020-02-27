@@ -20,11 +20,11 @@ View the code on the [Distiller repo](https://github.com/18F/FAC-Distiller/tree/
 ### Earlier prototypes explored 
 _SAFR_ or _Single Audit Finding Resolution tool_ focuses on the high-priority post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
 
-View the Design files for the UI and its code. 
+View the [code](https://github.com/18F/federal-grant-reporting/tree/master/single-audit/single_audit) and [Design files](https://github.com/18F/federal-grant-reporting/tree/master/design_files) for the UI. 
 
 _Auto-populating the FFR_ This tool fills out more than a quarter of the FFR's fields using data from SAM.gov, where all grant applicants must register before applying for grants, The FFR, or SF-425, is a form grantees have to fill out and submit at least four times per year. Using this tool would reduce error prone and duplicative data entry. 
 
-View the codebase. 
+View the [codebase](https://github.com/18F/federal-grant-reporting/tree/master/sam-to-ffr). 
 
 ## How can you help?
 

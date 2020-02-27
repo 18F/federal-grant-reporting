@@ -7,15 +7,24 @@
 To that end, we're building prospective shared solutions for the single audit finding resolution process.
 
 ### Distiller
-Distiller, provides easier access to data, reducing a multi-day process to less than five minutes. This stands to help auditors, grant managers, and agency CFOs as well as grantees.
+Distiller, provides easier access to audit data. What is a multi-day process for some agencies has been reduced to a few minutes by helping grant managers sorting through the Federal Audit Clearinghouse to identify the specific audits that they need to know have been completed and confirm if action needs to be taken by themselves or others. This tool is also helpful auditors, agency CFOs as well as grantees to be aware of audit activity happening by federal agency/sub agency. 
+
+Try out the [Distiller](https://fac-distiller.app.cloud.gov/) for yourself or view its separate [github repo](https://github.com/18F/FAC-Distiller/blob/master/README.md).
+
 
 ### Audit Data Extractor 
-This prototype will locate all findings in any audit pdf and extracts specific information about each audit findings. Namely Audit finding texts and Grantee responses to start. Ultimately the goal is to improve entering data into the Federal Audit Clearinghouse. When uploading a single audit pdf, the PDF Audit Data Extractor will extract and pre-populate finding information into the data collection form so that auditors or grantees can  review and confirm the data rather than requiring them to copy and paste or retype critical data. When you consider that for each finding, multiple fields are required to be filled out, and the number of audit findings each year, the time savings is considerable. One outside auditor for a state audit said he typically sees 100 findings in each years audit and that this could save 1.5 hours to his work and another 1.5 hours to the grantees staff time considering the additional fields added to the data collection form.
+Download any audit pdf from the distiller and run it though this module that reads Single Audit PDFs page by page and extracts findings text and corrective action plans which can be viewed as a csv. This proof-of-concept module that is a companion to the Distiller. This lays the groundwork for improved data entry into the Federal Audit Clearinghouse. When uploading a single audit pdf, the Audit Data Extractor will extract and pre-populate finding information into the data collection form so that auditors or grantees can  review and confirm the data rather than requiring them to copy and paste or retype critical data. When you consider that for each finding, multiple fields are required to be filled out, and the number of audit findings each year, the time savings is considerable. One outside auditor for a state audit said he typically sees 100 findings in each years audit and that this could save 1.5 hours to his work and another 1.5 hours to the grantees staff time considering the additional fields added to the data collection form.
+
+View the code on the [Distiller repo](https://github.com/18F/FAC-Distiller/tree/master/distiller/extraction/).
 
 ### Earlier prototypes explored 
 _SAFR_ or _Single Audit Finding Resolution tool_ focuses on the high-priority post-award financial grant reporting. By facilitating direct communication and increasing visibility into the state of work, the prototype dramatically 1) streamlines the finding resolution process and 2) gives agencies unprecedented visibility into single audit findings relevant to their shared grantees, thereby reducing costly duplication of effort for agencies and grantees alike.
 
+View the Design files for the UI and its code. 
 
+_Auto-populating the FFR_ This tool fills out more than a quarter of the FFR's fields using data from SAM.gov, where all grant applicants must register before applying for grants, The FFR, or SF-425, is a form grantees have to fill out and submit at least four times per year. Using this tool would reduce error prone and duplicative data entry. 
+
+View the codebase. 
 
 ## How can you help?
 
